@@ -56,3 +56,5 @@ elif user_result < initial_result:
 else:
     st.info("The estimated concentration remains the same.")
 
+streamlit run Apopka_app.py
+
