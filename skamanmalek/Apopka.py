@@ -1,7 +1,8 @@
 
-pip install streamlit
-
 import streamlit as st
+
+st.title('CyAN in Lake Apopka')
+streamlit run Apopka.py
 
 # Your regression coefficients
 coefficients = {
