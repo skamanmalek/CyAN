@@ -5,7 +5,6 @@ st.title('CyAN in Lake Apopka')
 
 import streamlit as st
 
-import streamlit as st
 
 # Your regression coefficients
 coefficients = {
@@ -33,7 +32,6 @@ initial_result = coefficients['intercept']
 for var, coef in coefficients.items():
     if var != 'intercept':
         key = f'{var}_N'
-        print(f"Processing key: {key}")
         initial_result += coef * initial_values.get(key, 0)
 
 # Streamlit app
@@ -43,7 +41,6 @@ st.title("Cyanobacteria Concentrations Estimation")
 user_values = {}
 for var in initial_values.keys():
     key = f'{var}_N'
-    print(f"Processing user input for key: {key}")
     user_values[key] = st.number_input(f'Enter {var}', value=initial_values.get(key, 0))
 
 # Calculate the result based on user input
@@ -51,7 +48,6 @@ user_result = coefficients['intercept']
 for var, coef in coefficients.items():
     if var != 'intercept':
         key = f'{var}_N'
-        print(f"Processing key for user input: {key}")
         user_result += coef * user_values.get(key, 0)
 
 # Display the initial and user results
@@ -66,7 +62,3 @@ elif user_result < initial_result:
 else:
     st.info("The estimated concentration remains the same.")
 
-elif user_result < initial_result:
-    st.error("The estimated concentration has decreased.")
-else:
-    st.info("The estimated concentration remains the same.")
