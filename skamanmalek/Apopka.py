@@ -1,64 +1,79 @@
-
 import streamlit as st
 
-st.title('CyAN in Lake Apopka')
+# Initial values according to baseline of 2022 for Lake Apopka
+initial_values = {
+    'AVFST_Max': 303.12,
+    'ARAIN_Average': 184.47,
+    'TN_HUC12': 132.57559,
+    'TP_HUC10': 16.330554,
+    'Cropland_HUC10': 9.385451904,
+    'Developed_HUC12': 20.06372067
+}
 
-import streamlit as st
+# Min and max values across all variables
+min_values = {
+    'AVFST_Max': 300.95,
+    'ARAIN_Average': 163.72,
+    'TN_HUC12': 14.37253718,
+    'TP_HUC10': 7.1053873,
+    'Cropland_HUC10': 0,
+    'Developed_HUC12': 0.052616068
+}
 
+max_values = {
+    'AVFST_Max': 305.85,
+    'ARAIN_Average': 223.83,
+    'TN_HUC12': 252.0831295,
+    'TP_HUC10': 24.931832,
+    'Cropland_HUC10': 86.75640259,
+    'Developed_HUC12': 79.36556518
+}
 
-# Your regression coefficients
+# Coefficients for Lake Apopka
 coefficients = {
     'intercept': 2.485492847,
     'AVFST_Max': 0.360760140263049,
     'ARAIN_Average': -0.225355885697879,
-    'HUC12_TN': -2.79949760100647,
-    'HUC10_TP': -0.777649170971426,
-    'HUC10_cropland': 0.156721981986119,
-    'HUC12_developed': -0.744617972431082
+    'TN_HUC12': -2.79949760100647,
+    'TP_HUC10': -0.777649170971426,
+    'Cropland_HUC10': 0.156721981986119,
+    'Developed_HUC12': -0.744617972431082
 }
 
-# Initial values
-initial_values = {
-    'HUC10_cropland_area_1_N': 0.038415,
-    'HUC10_TP_N': 0.457383,
-    'HUC12_developed_area_5_N': 0.343229,
-    'HUC12_TN_N': 0.441363,
-    'ARAIN_Average_N': 0.340043,
-    'AVFST_Max_N': 0.687755
-}
-
-# Calculate the initial result
-initial_result = coefficients['intercept']
-for var, coef in coefficients.items():
-    if var != 'intercept':
-        key = f'{var}_N'
-        initial_result += coef * initial_values.get(key, 0)
+# Max of Bloom Magnitude
+max_bloom_magnitude = 2156.065284
 
 # Streamlit app
-st.title("Cyanobacteria Concentrations Estimation")
+st.title('Cyanobacteria Bloom Magnitude Estimation')
 
-# Input fields for user to change values
-user_values = {}
+# Input fields for user to change initial values
+user_inputs = {}
 for var in initial_values.keys():
-    key = f'{var}_N'
-    user_values[key] = st.number_input(f'Enter {var}', value=initial_values.get(key, 0))
+    user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_values[var], max_value=max_values[var], value=initial_values[var])
 
-# Calculate the result based on user input
-user_result = coefficients['intercept']
+# Normalize input values
+normalized_inputs = {}
+for var in initial_values.keys():
+    normalized_inputs[var] = (user_inputs[var] - min_values[var]) / (max_values[var] - min_values[var])
+    # Ensure values are between 0 and 1
+    normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
+
+# Calculate Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1)
+predicted_y1 = coefficients['intercept']
 for var, coef in coefficients.items():
     if var != 'intercept':
-        key = f'{var}_N'
-        user_result += coef * user_values.get(key, 0)
+        predicted_y1 += coef * normalized_inputs[var]
 
-# Display the initial and user results
-st.write(f"Initial Cyanobacteria Concentration: {initial_result:.4f}")
-st.write(f"User's Estimated Cyanobacteria Concentration: {user_result:.4f}")
+# Calculate Cyanobacteria annual bloom magnitude
+final_bloom_magnitude = predicted_y1 * max_bloom_magnitude
+
+# Display results
+st.write(f"Initial Bloom Magnitude: {initial_values['Bloom_Magnitude']:.4f}")
+st.write(f"Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1): {predicted_y1:.4f}")
+st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
 
 # Compare with the initial value
-if user_result > initial_result:
-    st.success("The estimated concentration has increased.")
-elif user_result < initial_result:
-    st.error("The estimated concentration has decreased.")
-else:
-    st.info("The estimated concentration remains the same.")
+percentage_change = ((final_bloom_magnitude - initial_values['Bloom_Magnitude']) / initial_values['Bloom_Magnitude']) * 100
+st.write(f"Percentage Change: {percentage_change:.2f}%")
 
+# Note: You may need to adjust the 'Bloom_Magnitude' key in initial_values based on your actual variable names.
