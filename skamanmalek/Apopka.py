@@ -13,7 +13,7 @@ def calculate_bloom_magnitude(user_values, coefficients, min_max_values):
     
     return predicted_y1 * min_max_values[-1][1]
 
-# Initial values according to baseline of 2022
+# Initial values according to baseline of 2022 for Lake Apopka
 initial_values = {
     'Bloom Magnitude': 147.180228904029,
     'AVFST_Max': 303.12,
@@ -51,12 +51,12 @@ st.title("Cyanobacteria Bloom Magnitude Estimation")
 
 # Input sliders for user to change initial values
 user_values = {
-    'HUC10_cropland_area_1': st.slider("Enter HUC10 Cropland Area (%)", 0, 100, 50),
-    'HUC12_developed_area_5': st.slider("Enter HUC12 Developed Area (%)", 0, 100, 50),
-    'HUC10_TP': st.slider("Enter HUC10 TP Value", 0, 50, 25),
-    'HUC12_TN': st.slider("Enter HUC12 TN Value", 0, 500, 250),
-    'ARAIN': st.slider("Enter ARAIN Value", 0, 450, 225),
-    'AVFST_Max': st.slider("Enter AVFST_Max Value", 67, 106, 90),
+    'HUC10_cropland_area_1': st.slider("Enter HUC10 Cropland Area (%)", 0, 100, initial_values['Cropland_HUC10']),
+    'HUC12_developed_area_5': st.slider("Enter HUC12 Developed Area (%)", 0, 100, initial_values['Developed_HUC12']),
+    'HUC10_TP': st.slider("Enter HUC10 TP Value", 0, 50, initial_values['TP_HUC10']),
+    'HUC12_TN': st.slider("Enter HUC12 TN Value", 0, 500, initial_values['TN_HUC12']),
+    'ARAIN': st.slider("Enter ARAIN Value", 0, 450, initial_values['ARAIN_Average']),
+    'AVFST_Max': st.slider("Enter AVFST_Max Value", 67, 106, initial_values['AVFST_Max']),
 }
 
 # Calculate predicted bloom magnitude
