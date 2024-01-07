@@ -57,7 +57,9 @@ for var in initial_values.keys():
             max_val = float(max_values.get(var, 1))
             # Generate a unique key dynamically
             key = f"{var}_slider_{hash(var)}"
-            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)), key=key)
+            # Enforce the bounds for user input
+            value = min(max_val, max(min_val, float(initial_values.get(var, 0))))
+            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=value, key=key)
         except Exception as e:
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
@@ -103,7 +105,6 @@ elif percentage_change > 0:
     st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
 else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
-
 
 # Bar chart
 chart_data = pd.DataFrame({
