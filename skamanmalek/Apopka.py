@@ -1,4 +1,8 @@
 import streamlit as st
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Initial values according to baseline of 2022 for Lake Apopka
 initial_values = {
@@ -101,3 +105,7 @@ elif percentage_change < 0:
     st.info("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
 else:
     st.info("The estimated bloom magnitude remains the same.")
+
+# Bar chart
+chart_data = pd.DataFrame({'Initial Bloom Magnitude': [initial_values['Norm_CyAN']], 'Predicted Bloom Magnitude': [final_bloom_magnitude]})
+st.bar_chart(chart_data)
