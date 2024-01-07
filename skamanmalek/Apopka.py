@@ -2,6 +2,7 @@ import streamlit as st
 
 # Initial values according to baseline of 2022 for Lake Apopka
 initial_values = {
+    'Bloom_Magnitude': 147.180228904029,
     'AVFST_Max': 303.12,
     'ARAIN_Average': 184.47,
     'TN_HUC12': 132.57559,
@@ -75,5 +76,3 @@ st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
 # Compare with the initial value
 percentage_change = ((final_bloom_magnitude - initial_values['Bloom_Magnitude']) / initial_values['Bloom_Magnitude']) * 100
 st.write(f"Percentage Change: {percentage_change:.2f}%")
-
-# Note: You may need to adjust the 'Bloom_Magnitude' key in initial_values based on your actual variable names.
