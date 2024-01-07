@@ -1,5 +1,6 @@
 pip install pandas
-
+cd pandas
+python setup.py install
 import streamlit as st
 import pandas as pd
 import numpy as np
