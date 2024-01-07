@@ -54,8 +54,8 @@ for var in initial_values.keys():
     if var != 'Norm_CyAN':
         try:
             # Slider for the original value
-            min_val = float(initial_values[var] * 0.8)
-            max_val = float(initial_values[var] * 1.2)
+            min_val = float(min_values[var])
+            max_val = float(max_values[var])
             user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=initial_values[var])
 
             # Text input for percentage change
@@ -64,8 +64,8 @@ for var in initial_values.keys():
             try:
                 # Parse percentage change input
                 percentage_change = float(percentage_change_input)
-                # Adjust user input based on percentage change
-                user_inputs[var] *= (1 + percentage_change / 100)
+                # Adjust user input based on percentage change, ensuring it doesn't go below the minimum value
+                user_inputs[var] = max(min_val, user_inputs[var] * (1 + percentage_change / 100))
             except ValueError:
                 st.warning(f"Please enter a valid numerical value for % change for {var}. Using default value.")
         except Exception as e:
