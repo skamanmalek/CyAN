@@ -1,3 +1,4 @@
+import streamlit as st
 pip install pandas
 pip install pandas
 pip install numpy
