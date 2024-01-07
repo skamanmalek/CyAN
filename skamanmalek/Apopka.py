@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
@@ -51,17 +50,6 @@ st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
 # Input fields for the user to change initial values
 user_inputs = {}
 for var in initial_values.keys():
-    try:
-        min_val = float(min_values.get(var, 0))
-        max_val = float(max_values.get(var, 1))
-        user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)))
-    except Exception as e:
-        st.write(f"Error: {e}")
-        st.write(f"Variable {var} caused an error.")
-
-# Input fields for user to change initial values
-user_inputs = {}
-for var in initial_values.keys():
     if var != 'Norm_CyAN':
         try:
             min_val = float(min_values.get(var, 0))
@@ -71,10 +59,22 @@ for var in initial_values.keys():
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
 
+# Normalize input values
+normalized_inputs = {}
+for var in initial_values.keys():
+    if var != 'Norm_CyAN':
+        try:
+            normalized_inputs[var] = (user_inputs.get(var, 0) - min_values.get(var, 0)) / (max_values.get(var, 1) - min_values.get(var, 0))
+            # Ensure values are between 0 and 1
+            normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
+        except Exception as e:
+            st.write(f"Error: {e}")
+            st.write(f"Variable {var} caused an error.")
+
 # Calculate Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1)
 predicted_y1 = coefficients['intercept']
 for var, coef in coefficients.items():
-    if var != 'intercept':
+    if var != 'intercept' and var != 'Norm_CyAN':
         try:
             predicted_y1 += coef * normalized_inputs.get(var, 0)
         except Exception as e:
@@ -100,9 +100,8 @@ if percentage_change == 0:
     st.info("The estimated bloom magnitude remains the same.")
 elif percentage_change > 0:
     st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
-else:  # No condition needed here; it should be "else:" instead of "else percentage_change < 0:"
+else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
-
 
 # Bar chart
 chart_data = pd.DataFrame({
