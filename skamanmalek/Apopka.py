@@ -31,25 +31,6 @@ slider_max_values = {
     'HUC12_developed_area_5': 100
 }
 
-# Min and max values for equations
-equation_min_values = {
-    'AVFST_Max': 82.04,
-    'ARAIN_Average': 163.72,
-    'HUC12_TN': 14.37253718,
-    'HUC10_TP': 7.105387318,
-    'HUC10_cropland_area_1': 0,
-    'HUC12_developed_area_5': 0.052616068
-}
-
-equation_max_values = {
-    'AVFST_Max': 90.86,
-    'ARAIN_Average': 223.83,
-    'HUC12_TN': 252.0831295,
-    'HUC10_TP': 24.93183214,
-    'HUC10_cropland_area_1': 86.75640259,
-    'HUC12_developed_area_5': 79.36556518
-}
-
 # Coefficients for Lake Apopka
 coefficients = {
     'intercept': 2.485492847,
@@ -83,8 +64,8 @@ for var in initial_values.keys():
             st.write(f"Variable {var} caused an error.")
 
         try:
-            # Use equation_min_values and equation_max_values for equations
-            normalized_inputs[var] = (user_inputs.get(var, 0) - equation_min_values.get(var, 0)) / (equation_max_values.get(var, 1) - equation_min_values.get(var, 0))
+            # Normalize input values and ensure they are between 0 and 1
+            normalized_inputs[var] = (user_inputs.get(var, 0) - slider_min_values.get(var, 0)) / (slider_max_values.get(var, 1) - slider_min_values.get(var, 0))
             normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
         except Exception as e:
             st.write(f"Error: {e}")
