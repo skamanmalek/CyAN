@@ -88,8 +88,8 @@ final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
 percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
 
 # Display the final result
-st.write(f"Initial Bloom Magnitude: {initial_values['Norm_CyAN']:.4f}")
-st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
+st.write(f"Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022: {initial_values['Norm_CyAN']:.4f}")
+st.write(f"Predicted Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
 st.write(f"Percentage Change: {percentage_change:.2f}%")
 
 # Display a message based on the change
