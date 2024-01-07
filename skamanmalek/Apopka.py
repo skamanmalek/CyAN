@@ -46,7 +46,7 @@ coefficients = {
 }
 
 # Streamlit app
-st.title('Cyanobacteria Bloom Magnitude Estimation')
+st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
 
 # Input fields for the user to change initial values
 user_inputs = {}
