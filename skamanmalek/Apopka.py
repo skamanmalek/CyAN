@@ -52,24 +52,39 @@ st.title('Cyanobacteria Bloom Magnitude Estimation')
 user_inputs = {}
 for var in initial_values.keys():
     try:
-        # Set default value to initial value for 'Norm_CyAN'
-        default_value = initial_values[var] if var == 'Norm_CyAN' else 0.0
         min_val = float(min_values.get(var, 0))
         max_val = float(max_values.get(var, 1))
-        user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=default_value)
+        user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)))
     except Exception as e:
         st.write(f"Error: {e}")
         st.write(f"Variable {var} caused an error.")
 
 # Normalize input values
-normalized_inputs = {var: user_inputs.get(var, 0) / initial_values[var] for var in initial_values.keys()}
+normalized_inputs = {}
+for var in initial_values.keys():
+    try:
+        normalized_inputs[var] = (user_inputs.get(var, 0) - min_values.get(var, 0)) / (max_values.get(var, 1) - min_values.get(var, 0))
+        # Ensure values are between 0 and 1
+        normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
+    except Exception as e:
+        st.write(f"Error: {e}")
+        st.write(f"Variable {var} caused an error.")
 
 # Calculate Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1)
-predicted_y1 = coefficients['intercept'] + sum(coef * normalized_inputs.get(var, 0) for var, coef in coefficients.items() if var != 'intercept')
+predicted_y1 = coefficients['intercept']
+for var, coef in coefficients.items():
+    if var != 'intercept':
+        try:
+            predicted_y1 += coef * normalized_inputs.get(var, 0)
+        except Exception as e:
+            st.write(f"Error: {e}")
+            st.write(f"Variable {var} caused an error.")
+
+# Ensure values of X1 to X6 are between 0 and 1
 predicted_y1 = max(0, min(1, predicted_y1))
 
 # Calculate Cyanobacteria annual bloom magnitude
-final_bloom_magnitude = predicted_y1 * initial_values['Norm_CyAN']
+final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
 
 # Calculate the percentage change
 percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
