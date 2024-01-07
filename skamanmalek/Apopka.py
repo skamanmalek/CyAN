@@ -2,32 +2,34 @@ import streamlit as st
 
 # Initial values according to baseline of 2022 for Lake Apopka
 initial_values = {
-    'Bloom_Magnitude': 158.3693646,
-    'AVFST_Max': 303.12,
-    'ARAIN_Average': 184.47,
-    'TN_HUC12': 132.57559,
-    'TP_HUC10': 16.330554,
-    'Cropland_HUC10': 9.385451904,
-    'Developed_HUC12': 20.06372067
+    'Norm_CyAN': 147.180229,  # Initial value for Bloom Magnitude
+    'AVFST_Max': 304.32,
+    'ARAIN_Average': 184.16,
+    'HUC12_TN': 119.289254,
+    'HUC10_TP': 15.258894,
+    'HUC10_cropland_area_1': 3.332722,
+    'HUC12_developed_area_5': 27.275139
 }
 
-# Min and max values across all variables
+# Min and max values across all variables for normalization
 min_values = {
+    'Norm_CyAN': 0,
     'AVFST_Max': 300.95,
     'ARAIN_Average': 163.72,
-    'TN_HUC12': 14.37253718,
-    'TP_HUC10': 7.1053873,
-    'Cropland_HUC10': 0,
-    'Developed_HUC12': 0.052616068
+    'HUC12_TN': 14.37253718,
+    'HUC10_TP': 7.105387318,
+    'HUC10_cropland_area_1': 0,
+    'HUC12_developed_area_5': 0.052616068
 }
 
 max_values = {
+    'Norm_CyAN': 194.0458755,
     'AVFST_Max': 305.85,
     'ARAIN_Average': 223.83,
-    'TN_HUC12': 252.0831295,
-    'TP_HUC10': 24.931832,
-    'Cropland_HUC10': 86.75640259,
-    'Developed_HUC12': 79.36556518
+    'HUC12_TN': 252.0831295,
+    'HUC10_TP': 24.93183214,
+    'HUC10_cropland_area_1': 86.75640259,
+    'HUC12_developed_area_5': 79.36556518
 }
 
 # Coefficients for Lake Apopka
@@ -35,14 +37,11 @@ coefficients = {
     'intercept': 2.485492847,
     'AVFST_Max': 0.360760140263049,
     'ARAIN_Average': -0.225355885697879,
-    'TN_HUC12': -2.79949760100647,
-    'TP_HUC10': -0.777649170971426,
-    'Cropland_HUC10': 0.156721981986119,
-    'Developed_HUC12': -0.744617972431082
+    'HUC12_TN': -2.79949760100647,
+    'HUC10_TP': -0.777649170971426,
+    'HUC10_cropland_area_1': 0.156721981986119,
+    'HUC12_developed_area_5': -0.744617972431082
 }
-
-# Max of Bloom Magnitude
-max_bloom_magnitude = 194.0458755
 
 # Streamlit app
 st.title('Cyanobacteria Bloom Magnitude Estimation')
@@ -83,13 +82,21 @@ for var, coef in coefficients.items():
 predicted_y1 = max(0, min(1, predicted_y1))
 
 # Calculate Cyanobacteria annual bloom magnitude
-final_bloom_magnitude = predicted_y1 * max_bloom_magnitude
+final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
 
 # Display results
-st.write(f"Initial Bloom Magnitude: {initial_values['Bloom_Magnitude']:.4f}")
+st.write(f"Initial Bloom Magnitude: {initial_values['Norm_CyAN']:.4f}")
 st.write(f"Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1): {predicted_y1:.4f}")
 st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
 
 # Compare with the initial value
-percentage_change = ((final_bloom_magnitude - initial_values['Bloom_Magnitude']) / initial_values['Bloom_Magnitude']) * 100
-st.write(f"Percentage Change: {percentage_change:.2f}%")
+percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
+st.write(f"Percentage Change: {percentage_change:.4f}%")
+
+# Display a message based on the change
+if percentage_change > 0:
+    st.success("The estimated bloom magnitude has increased.")
+elif percentage_change < 0:
+    st.error("The estimated bloom magnitude has decreased.")
+else:
+    st.info("The estimated bloom magnitude remains the same.")
