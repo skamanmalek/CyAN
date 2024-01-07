@@ -34,8 +34,9 @@ AVFST_Max_user = st.slider("AVFST_Max User Input", b1, b2, initial_values['AVFST
 ARAIN_Average_user = st.slider("ARAIN_Average User Input", c1, c2, initial_values['ARAIN_Average'])
 HUC12_TN_user = st.slider("HUC12_TN User Input", d1, d2, initial_values['HUC12_TN'])
 HUC10_TP_user = st.slider("HUC10_TP User Input", e1, e2, initial_values['HUC10_TP'])
-HUC10_cropland_area_user = st.slider("HUC10_cropland_area User Input", f1, f2, initial_values['HUC10_cropland_area_1'])
-HUC12_developed_area_5_user = st.slider("HUC12_developed_area_5 User Input", g1, g2, initial_values['HUC12_developed_area_5'])
+HUC10_cropland_area_user = st.slider("HUC10_cropland_area User Input", float(f1), float(f2), initial_values['HUC10_cropland_area_1'])
+HUC12_developed_area_5_user = st.slider("HUC12_developed_area_5 User Input", float(g1), float(g2), initial_values['HUC12_developed_area_5'])
+
 
 # Calculate Predicted Magnitude
 Y = coefficients['intercept'] + \
