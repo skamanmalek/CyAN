@@ -1,97 +1,92 @@
 import streamlit as st
-import pandas as pd
+
+# Function to normalize input values
+def normalize(value, min_val, max_val):
+    return (value - min_val) / (max_val - min_val)
+
+# Function to calculate predicted bloom magnitude
+def calculate_bloom_magnitude(user_values, coefficients, min_max_values):
+    normalized_values = [normalize(user_values[i], min_max_values[i][0], min_max_values[i][1]) for i in range(len(user_values))]
+    predicted_y1 = coefficients['intercept']
+    for i in range(len(coefficients) - 1):
+        predicted_y1 += coefficients[f'X{i+1}'] * normalized_values[i]
+    
+    return predicted_y1 * min_max_values[-1][1]
+
+# Initial values according to baseline of 2022
+initial_values = {
+    'Bloom Magnitude': 147.180228904029,
+    'AVFST_Max': 303.12,
+    'ARAIN_Average': 184.47,
+    'TN_HUC12': 132.57559,
+    'TP_HUC10': 16.330554,
+    'Cropland_HUC10': 9.385451904,
+    'Developed_HUC12': 20.06372067,
+}
+
+# Min and max across all
+min_max_values = {
+    'AVFST_Max': (67, 106),
+    'ARAIN_Average': (163.72, 223.83),
+    'TN_HUC12': (14.37253718, 252.0831295),
+    'TP_HUC10': (7.1053873, 24.931832),
+    'Cropland_HUC10': (0, 86.75640259),
+    'Developed_HUC12': (0.052616068, 79.36556518),
+    'Bloom_Magnitude': (0, 194.0458755),
+}
 
 # Coefficients for Lake Apopka
 coefficients = {
     'intercept': 2.485492847,
-    'AVFST_Max': 0.360760140263049,
-    'ARAIN_Average': -0.225355885697879,
-    'HUC12_TN': -2.79949760100647,
-    'HUC10_TP': -0.777649170971426,
-    'HUC10_cropland_area_1': 0.156721981986119,
-    'HUC12_developed_area_5': -0.744617972431082
+    'X1': 0.360760140263049,
+    'X2': -0.225355885697879,
+    'X3': -2.79949760100647,
+    'X4': -0.777649170971426,
+    'X5': 0.156721981986119,
+    'X6': -0.744617972431082,
 }
 
-# Input fields for the user to change initial values
-user_inputs = {}
-percentage_changes = {}
-normalized_inputs = {}
+# Streamlit app
+st.title("Cyanobacteria Bloom Magnitude Estimation")
 
-for var in coefficients.keys():
-    if var != 'intercept':
-        try:
-            min_val = float(min_values.get(var, 0))
-            max_val = float(max_values.get(var, 1))
+# Input sliders for user to change initial values
+user_values = {
+    'HUC10_cropland_area_1': st.slider("Enter HUC10 Cropland Area (%)", 0, 100, 50),
+    'HUC12_developed_area_5': st.slider("Enter HUC12 Developed Area (%)", 0, 100, 50),
+    'HUC10_TP': st.slider("Enter HUC10 TP Value", 0, 50, 25),
+    'HUC12_TN': st.slider("Enter HUC12 TN Value", 0, 500, 250),
+    'ARAIN': st.slider("Enter ARAIN Value", 0, 450, 225),
+    'AVFST_Max': st.slider("Enter AVFST_Max Value", 67, 106, 90),
+}
 
-            # Define specific ranges for each variable
-            if var == 'HUC10_cropland_area_1':
-                min_val, max_val = 0, 100
-            elif var == 'HUC12_developed_area_5':
-                min_val, max_val = 0, 100
-            elif var == 'HUC10_TP':
-                min_val, max_val = 0, 50
-            elif var == 'HUC12_TN':
-                min_val, max_val = 0, 500
-            elif var == 'ARAIN_Average':
-                min_val, max_val = 0, 450
-            elif var == 'AVFST_Max':
-                min_val, max_val = 67, 106
+# Calculate predicted bloom magnitude
+predicted_bloom_magnitude = calculate_bloom_magnitude(
+    [user_values['AVFST_Max'], user_values['ARAIN'], user_values['HUC12_TN'],
+     user_values['HUC10_TP'], user_values['HUC10_cropland_area_1'],
+     user_values['HUC12_developed_area_5']],
+    coefficients,
+    [(min_max_values['AVFST_Max'][0], min_max_values['AVFST_Max'][1]),
+     (min_max_values['ARAIN_Average'][0], min_max_values['ARAIN_Average'][1]),
+     (min_max_values['TN_HUC12'][0], min_max_values['TN_HUC12'][1]),
+     (min_max_values['TP_HUC10'][0], min_max_values['TP_HUC10'][1]),
+     (min_max_values['Cropland_HUC10'][0], min_max_values['Cropland_HUC10'][1]),
+     (min_max_values['Developed_HUC12'][0], min_max_values['Developed_HUC12'][1]),
+     (min_max_values['Bloom_Magnitude'][0], min_max_values['Bloom_Magnitude'][1])]
+)
 
-            # Input box for user to add +/- percentage change
-            percentage_changes[var] = st.number_input(f'Enter percentage change for {var}', min_value=-100.0, max_value=100.0, step=1.0, key=f"{var}_percentage")
+# Display predicted bloom magnitude
+st.subheader("Predicted Cyanobacteria Bloom Magnitude (Normalized):")
+st.write(predicted_bloom_magnitude)
 
-            # Calculate user input based on percentage change
-            user_inputs[var] = initial_values[var] * (1 + percentage_changes[var] / 100)
+# Calculate actual bloom magnitude
+initial_bloom_magnitude = initial_values['Bloom Magnitude']
+actual_bloom_magnitude = predicted_bloom_magnitude * min_max_values['Bloom_Magnitude'][1]
 
-            # Ensure user input is within the specified range
-            user_inputs[var] = max(min_val, min(max_val, user_inputs[var]))
+# Display actual bloom magnitude
+st.subheader("Actual Cyanobacteria Bloom Magnitude:")
+st.write(actual_bloom_magnitude)
 
-            # Normalize input values and ensure they are between 0 and 1
-            normalized_inputs[var] = (user_inputs[var] - min_val) / (max_val - min_val)
-            normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
-
-        except Exception as e:
-            st.write(f"Error: {e}")
-            st.write(f"Variable {var} caused an error.")
-
-# Calculate Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1)
-predicted_y1 = coefficients['intercept']
-
-for var, coef in coefficients.items():
-    if var != 'intercept':
-        try:
-            predicted_y1 += coef * normalized_inputs.get(var, 0)
-        except Exception as e:
-            st.write(f"Error: {e}")
-            st.write(f"Variable {var} caused an error.")
-
-# Ensure values of X1 to X6 are between 0 and 1
-predicted_y1 = max(0, min(1, predicted_y1))
-
-# Calculate Cyanobacteria annual bloom magnitude
-final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
-
-# Calculate the percentage change
-percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
-
-# Display the final result
-st.write(f"Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022: {initial_values['Norm_CyAN']:.4f}")
-st.write(f"Predicted Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
-st.write(f"Percentage Change: {percentage_change:.2f}%")
-
-# Display a message based on the change with color
-threshold = 0.001  # Adjust this threshold as needed
-
-if abs(percentage_change) < threshold:
-    st.info("The estimated bloom magnitude remains the same.")
-elif percentage_change > 0:
-    st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
-else:
-    st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
-
-# Bar chart
-chart_data = pd.DataFrame({
-    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
-    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
-})
-st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
+# Compare and display percentage change
+percentage_change = ((actual_bloom_magnitude - initial_bloom_magnitude) / initial_bloom_magnitude) * 100
+st.subheader("Percentage Change:")
+st.write(f"{percentage_change:.2f}%")
