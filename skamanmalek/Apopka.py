@@ -1,8 +1,13 @@
 import streamlit as st
 
+
 # Install matplotlib if not already installed
-python -m pip install -U pip
-python -m pip install -U matplotlib
+import subprocess
+subprocess.run(['python', '-m', 'pip', 'install', '-U', 'pip'])
+subprocess.run(['python', '-m', 'pip', 'install', '-U', 'matplotlib'])
+
+# Rest of your script...
+
 
 # Initial values according to baseline of 2022 for Lake Apopka
 initial_values = {
