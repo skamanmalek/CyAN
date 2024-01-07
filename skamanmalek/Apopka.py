@@ -95,7 +95,7 @@ st.write(f"Predicted Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}"
 st.write(f"Percentage Change: {percentage_change:.2f}%")
 
 # Display a message based on the change with color
-if percentage_change== 0.00:
+if Predicted Cyanobacteria Bloom Magnitude== 158.3694:
     st.info("The estimated bloom magnitude remains the same.")
 elif percentage_change > 0:
     st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
