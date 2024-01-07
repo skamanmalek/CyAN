@@ -107,4 +107,6 @@ else:
 # Bar chart
 chart_data = pd.DataFrame({
     'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
-    'Magnitude Value': [initial_values['Norm
+    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
+})
+st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
