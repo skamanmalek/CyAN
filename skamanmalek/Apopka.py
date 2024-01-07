@@ -89,14 +89,4 @@ st.write(f"Initial Bloom Magnitude: {initial_values['Norm_CyAN']:.4f}")
 st.write(f"Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1): {predicted_y1:.4f}")
 st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
 
-# Compare with the initial value
-percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
-st.write(f"Percentage Change: {percentage_change:.4f}%")
-
-# Display a message based on the change
-if percentage_change > 0:
-    st.success("The estimated bloom magnitude has increased.")
-elif percentage_change < 0:
-    st.error("The estimated bloom magnitude has decreased.")
-else:
-    st.info("The estimated bloom magnitude remains the same.")
+The estimated bloom magnitude has increased.
