@@ -12,6 +12,27 @@ initial_values = {
     'HUC12_developed_area_5': 27.275139
 }
 
+# Min and max values across all variables for normalization
+min_values = {
+    'Norm_CyAN': 0,
+    'AVFST_Max': 82.04,
+    'ARAIN_Average': 163.72,
+    'HUC12_TN': 14.37253718,
+    'HUC10_TP': 7.105387318,
+    'HUC10_cropland_area_1': 0,
+    'HUC12_developed_area_5': 0.052616068
+}
+
+max_values = {
+    'Norm_CyAN': 194.0458755,
+    'AVFST_Max': 90.86,
+    'ARAIN_Average': 223.83,
+    'HUC12_TN': 252.0831295,
+    'HUC10_TP': 24.93183214,
+    'HUC10_cropland_area_1': 86.75640259,
+    'HUC12_developed_area_5': 79.36556518
+}
+
 # Coefficients for Lake Apopka
 coefficients = {
     'intercept': 2.485492847,
@@ -35,15 +56,18 @@ for var in initial_values.keys():
             # Generate a unique key dynamically
             key = f"{var}_slider_{hash(var)}"
             
-            # Set the range for sliders to initial_values[var] - 50 and initial_values[var] + 50
-            user_inputs[var] = st.slider(f'Enter {var} value', min_value=initial_values[var] - 50, max_value=initial_values[var] + 50, value=float(initial_values.get(var, 0)), key=key)
+            # Convert min_value and max_value to float for consistency
+            min_val = float(min_values[var])
+            max_val = float(max_values[var])
+            
+            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)), key=key)
         except Exception as e:
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
 
         try:
             # Normalize input values and ensure they are between 0 and 1
-            normalized_inputs[var] = (user_inputs.get(var, 0) - (initial_values[var] - 50)) / ((initial_values[var] + 50) - (initial_values[var] - 50))
+            normalized_inputs[var] = (user_inputs.get(var, 0) - min_values.get(var, 0)) / (max_values.get(var, 1) - min_values.get(var, 0))
             normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
         except Exception as e:
             st.write(f"Error: {e}")
@@ -63,7 +87,7 @@ for var, coef in coefficients.items():
 predicted_y1 = max(0, min(1, predicted_y1))
 
 # Calculate Cyanobacteria annual bloom magnitude
-final_bloom_magnitude = predicted_y1 * initial_values['Norm_CyAN']
+final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
 
 # Calculate the percentage change
 percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
