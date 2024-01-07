@@ -84,9 +84,15 @@ predicted_y1 = max(0, min(1, predicted_y1))
 # Calculate Cyanobacteria annual bloom magnitude
 final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
 
-# Display results
-st.write(f"Initial Bloom Magnitude: {initial_values['Norm_CyAN']:.4f}")
-st.write(f"Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1): {predicted_y1:.4f}")
-st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
+# ...
 
-The estimated bloom magnitude has increased.
+# Display a message based on the change
+if percentage_change > 0:
+    st.success("The estimated bloom magnitude has increased.")
+    st.info("The annual magnitude of cyanobacteria bloom is predicted to increase.")
+elif percentage_change < 0:
+    st.error("The estimated bloom magnitude has decreased.")
+    st.info("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
+else:
+    st.info("The estimated bloom magnitude remains the same.")
+
