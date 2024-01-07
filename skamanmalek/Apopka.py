@@ -49,23 +49,21 @@ st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
 
 # Input fields for the user to change initial values
 user_inputs = {}
+normalized_inputs = {}  # Define normalized_inputs in the correct scope
 for var in initial_values.keys():
     if var != 'Norm_CyAN':
         try:
             min_val = float(min_values.get(var, 0))
             max_val = float(max_values.get(var, 1))
-            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)))
+            # Pass a unique key to each slider
+            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)), key=f'{var}_slider')
         except Exception as e:
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
 
-# Normalize input values
-normalized_inputs = {}
-for var in initial_values.keys():
-    if var != 'Norm_CyAN':
         try:
+            # Normalize input values and ensure they are between 0 and 1
             normalized_inputs[var] = (user_inputs.get(var, 0) - min_values.get(var, 0)) / (max_values.get(var, 1) - min_values.get(var, 0))
-            # Ensure values are between 0 and 1
             normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
         except Exception as e:
             st.write(f"Error: {e}")
