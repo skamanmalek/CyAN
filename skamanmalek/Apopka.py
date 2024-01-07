@@ -51,7 +51,9 @@ st.title('Cyanobacteria Bloom Magnitude Estimation')
 user_inputs = {}
 for var in initial_values.keys():
     try:
-        user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_values.get(var, 0), max_value=max_values.get(var, 1), value=initial_values.get(var, 0))
+        min_val = float(min_values.get(var, 0))
+        max_val = float(max_values.get(var, 1))
+        user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)))
     except Exception as e:
         st.write(f"Error: {e}")
         st.write(f"Variable {var} caused an error.")
