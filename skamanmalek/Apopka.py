@@ -3,8 +3,8 @@ import pandas as pd
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
-    'Norm_CyAN': 158.3693646,  # Initial value for Bloom Magnitude
-    'AVFST_Max': 304.32,
+    'Norm_CyAN': 88.106000,
+    'AVFST_Max': 88.106000,
     'ARAIN_Average': 184.16,
     'HUC12_TN': 119.289254,
     'HUC10_TP': 15.258894,
@@ -14,8 +14,7 @@ initial_values = {
 
 # Min and max values across all variables for normalization
 min_values = {
-    'Norm_CyAN': 0,
-    'AVFST_Max': 300.95,
+    'AVFST_Max': 82.04,
     'ARAIN_Average': 163.72,
     'HUC12_TN': 14.37253718,
     'HUC10_TP': 7.105387318,
@@ -25,7 +24,7 @@ min_values = {
 
 max_values = {
     'Norm_CyAN': 194.0458755,
-    'AVFST_Max': 305.85,
+    'AVFST_Max': 90.86,
     'ARAIN_Average': 223.83,
     'HUC12_TN': 252.0831295,
     'HUC10_TP': 24.93183214,
@@ -47,46 +46,35 @@ coefficients = {
 # Streamlit app
 st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
 
-# Input fields for the user to change initial values
-user_inputs = {}
-normalized_inputs = {}  # Define normalized_inputs in the correct scope
-for var in initial_values.keys():
-    if var != 'Norm_CyAN':
-        try:
-            min_val = float(min_values.get(var, 0))
-            max_val = float(max_values.get(var, 1))
-            # Generate a unique key dynamically
-            key = f"{var}_slider_{hash(var)}"
-            # Enforce the bounds for user input
-            value = min(max_val, max(min_val, float(initial_values.get(var, 0))))
-            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=value, key=key)
-        except Exception as e:
-            st.write(f"Error: {e}")
-            st.write(f"Variable {var} caused an error.")
+# User Input
+st.sidebar.title("User Input")
+user_AVFST_Max = st.sidebar.slider('Enter AVFST_Max value', min_value=67, max_value=106, value=initial_values['AVFST_Max'])
+user_ARAIN_Average = st.sidebar.slider('Enter ARAIN_Average value', min_value=0, max_value=450, value=initial_values['ARAIN_Average'])
+user_HUC12_TN = st.sidebar.slider('Enter HUC12_TN value', min_value=0, max_value=500, value=initial_values['HUC12_TN'])
+user_HUC10_TP = st.sidebar.slider('Enter HUC10_TP value', min_value=0, max_value=50, value=initial_values['HUC10_TP'])
+user_HUC10_cropland_area_1 = st.sidebar.slider('Enter HUC10_cropland_area_1 value', min_value=0, max_value=100, value=initial_values['HUC10_cropland_area_1'])
+user_HUC12_developed_area_5 = st.sidebar.slider('Enter HUC12_developed_area_5 value', min_value=0, max_value=100, value=initial_values['HUC12_developed_area_5'])
 
-        try:
-            # Normalize input values and ensure they are between 0 and 1
-            normalized_inputs[var] = (user_inputs.get(var, 0) - min_values.get(var, 0)) / (max_values.get(var, 1) - min_values.get(var, 0))
-            normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
-        except Exception as e:
-            st.write(f"Error: {e}")
-            st.write(f"Variable {var} caused an error.")
+# Normalization
+def normalize(value, min_val, max_val):
+    return (value - min_val) / (max_val - min_val)
 
-# Calculate Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1)
-predicted_y1 = coefficients['intercept']
-for var, coef in coefficients.items():
-    if var != 'intercept' and var != 'Norm_CyAN':
-        try:
-            predicted_y1 += coef * normalized_inputs.get(var, 0)
-        except Exception as e:
-            st.write(f"Error: {e}")
-            st.write(f"Variable {var} caused an error.")
+# Calculate normalized values
+X1 = normalize(user_AVFST_Max, min_values['AVFST_Max'], max_values['AVFST_Max'])
+X2 = normalize(user_ARAIN_Average, min_values['ARAIN_Average'], max_values['ARAIN_Average'])
+X3 = normalize(user_HUC12_TN, min_values['HUC12_TN'], max_values['HUC12_TN'])
+X4 = normalize(user_HUC10_TP, min_values['HUC10_TP'], max_values['HUC10_TP'])
+X5 = normalize(user_HUC10_cropland_area_1, min_values['HUC10_cropland_area_1'], max_values['HUC10_cropland_area_1'])
+X6 = normalize(user_HUC12_developed_area_5, min_values['HUC12_developed_area_5'], max_values['HUC12_developed_area_5'])
 
-# Ensure values of X1 to X6 are between 0 and 1
-predicted_y1 = max(0, min(1, predicted_y1))
-
-# Calculate Cyanobacteria annual bloom magnitude
-final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
+# Calculate predicted Cyanobacteria bloom magnitude
+final_bloom_magnitude = coefficients['intercept'] + \
+                        X1 * coefficients['AVFST_Max'] + \
+                        X2 * coefficients['ARAIN_Average'] + \
+                        X3 * coefficients['HUC12_TN'] + \
+                        X4 * coefficients['HUC10_TP'] + \
+                        X5 * coefficients['HUC10_cropland_area_1'] + \
+                        X6 * coefficients['HUC12_developed_area_5']
 
 # Calculate the percentage change
 percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
