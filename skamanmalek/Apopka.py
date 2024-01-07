@@ -87,12 +87,35 @@ final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
 # Calculate the percentage change
 percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
 
-# Display the final result with color based on the change
-st.write(f"Initial Bloom Magnitude: {initial_values['Norm_CyAN']:.4f}")
-st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
-
 # Display a message based on the change with color
 if percentage_change < 0:
     st.error("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
 else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to increase.")
+
+# Bar chart
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Data for the bar chart
+categories = ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude']
+values = [initial_values['Norm_CyAN'], final_bloom_magnitude]
+
+# Bar colors based on increase or decrease
+colors = ['green' if percentage_change < 0 else 'red', 'red']
+
+# Bar chart
+fig, ax = plt.subplots()
+bars = ax.bar(categories, values, color=colors)
+
+# Add labels and title
+ax.set_ylabel('Magnitude')
+ax.set_title('Initial vs Predicted Cyanobacteria Bloom Magnitude')
+
+# Add value annotations on top of the bars
+for bar in bars:
+    yval = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, yval, round(yval, 2), ha='center', va='bottom')
+
+# Display the chart
+st.pyplot(fig)
