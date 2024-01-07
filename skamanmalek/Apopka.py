@@ -4,7 +4,7 @@ import pandas as pd
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
     'Norm_CyAN': 158.3693646,  # Initial value for Bloom Magnitude
-    'AVFST_Max': 304.32,
+    'AVFST_Max': 88.106000,
     'ARAIN_Average': 184.16,
     'HUC12_TN': 119.289254,
     'HUC10_TP': 15.258894,
@@ -15,7 +15,7 @@ initial_values = {
 # Min and max values across all variables for normalization
 min_values = {
     'Norm_CyAN': 0,
-    'AVFST_Max': 300.95,
+    'AVFST_Max': 82.04,
     'ARAIN_Average': 163.72,
     'HUC12_TN': 14.37253718,
     'HUC10_TP': 7.105387318,
@@ -25,7 +25,7 @@ min_values = {
 
 max_values = {
     'Norm_CyAN': 194.0458755,
-    'AVFST_Max': 305.85,
+    'AVFST_Max': 90.86,
     'ARAIN_Average': 223.83,
     'HUC12_TN': 252.0831295,
     'HUC10_TP': 24.93183214,
