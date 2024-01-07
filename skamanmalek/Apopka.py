@@ -48,6 +48,7 @@ st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
 # Input fields for the user to change initial values
 user_inputs = {}
 normalized_inputs = {}  # Define normalized_inputs in the correct scope
+
 for var in initial_values.keys():
     if var != 'Norm_CyAN':
         try:
