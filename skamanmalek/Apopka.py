@@ -1,7 +1,8 @@
 import streamlit as st
 
 # Install matplotlib if not already installed
-!pip install matplotlib
+pip install matplotlib
+
 
 # Initial values according to baseline of 2022 for Lake Apopka
 initial_values = {
