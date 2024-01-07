@@ -28,8 +28,8 @@ max_values = {
     'ARAIN_Average': 223.83,
     'HUC12_TN': 252.0831295,
     'HUC10_TP': 24.93183214,
-    'HUC10_cropland_area_1': 86.75640259,
-    'HUC12_developed_area_5': 79.36556518
+    'HUC10_cropland_area_1': 100,
+    'HUC12_developed_area_5': 100
 }
 
 # Coefficients for Lake Apopka
@@ -48,12 +48,12 @@ st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
 
 # User Input
 st.sidebar.title("User Input")
-user_AVFST_Max = st.sidebar.slider('Enter AVFST_Max value', min_value=67, max_value=106, value=initial_values['AVFST_Max'])
-user_ARAIN_Average = st.sidebar.slider('Enter ARAIN_Average value', min_value=0, max_value=450, value=initial_values['ARAIN_Average'])
-user_HUC12_TN = st.sidebar.slider('Enter HUC12_TN value', min_value=0, max_value=500, value=initial_values['HUC12_TN'])
-user_HUC10_TP = st.sidebar.slider('Enter HUC10_TP value', min_value=0, max_value=50, value=initial_values['HUC10_TP'])
-user_HUC10_cropland_area_1 = st.sidebar.slider('Enter HUC10_cropland_area_1 value', min_value=0, max_value=100, value=initial_values['HUC10_cropland_area_1'])
-user_HUC12_developed_area_5 = st.sidebar.slider('Enter HUC12_developed_area_5 value', min_value=0, max_value=100, value=initial_values['HUC12_developed_area_5'])
+user_AVFST_Max = st.sidebar.slider('Enter AVFST_Max value', 67, 106, initial_values['AVFST_Max'])
+user_ARAIN_Average = st.sidebar.slider('Enter ARAIN_Average value', 0, 450, initial_values['ARAIN_Average'])
+user_HUC12_TN = st.sidebar.slider('Enter HUC12_TN value', 0, 500, initial_values['HUC12_TN'])
+user_HUC10_TP = st.sidebar.slider('Enter HUC10_TP value', 0, 50, initial_values['HUC10_TP'])
+user_HUC10_cropland_area_1 = st.sidebar.slider('Enter HUC10_cropland_area_1 value', 0, 100, initial_values['HUC10_cropland_area_1'])
+user_HUC12_developed_area_5 = st.sidebar.slider('Enter HUC12_developed_area_5 value', 0, 100, initial_values['HUC12_developed_area_5'])
 
 # Normalization
 def normalize(value, min_val, max_val):
