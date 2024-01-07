@@ -3,7 +3,7 @@ import pandas as pd
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
-    'Norm_CyAN': 158.3694,  # Initial value for Bloom Magnitude
+    'Norm_CyAN': 158.3693646,  # Initial value for Bloom Magnitude
     'AVFST_Max': 304.32,
     'ARAIN_Average': 184.16,
     'HUC12_TN': 119.289254,
@@ -95,15 +95,12 @@ st.write(f"Predicted Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}"
 st.write(f"Percentage Change: {percentage_change:.2f}%")
 
 # Display a message based on the change with color
-threshold = 0.001  # Adjust this threshold as needed
-
-if abs(percentage_change) < threshold:
+if percentage_change == 0:
     st.info("The estimated bloom magnitude remains the same.")
 elif percentage_change > 0:
     st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
 else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
-
 
 # Bar chart
 chart_data = pd.DataFrame({
