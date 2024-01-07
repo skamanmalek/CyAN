@@ -21,11 +21,12 @@ normalized_inputs = {}
 for var in initial_values.keys():
     if var != 'Norm_CyAN':
         try:
+            # Slider for the original value
             min_val = float(initial_values[var] * 0.8)
             max_val = float(initial_values[var] * 1.2)
             user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=initial_values[var])
 
-            # Add input box for percentage change
+            # Text input for percentage change
             percentage_change_input = st.text_input(f'Enter % change for {var}', value="0.0")
 
             try:
