@@ -59,16 +59,17 @@ for var in initial_values.keys():
         st.write(f"Error: {e}")
         st.write(f"Variable {var} caused an error.")
 
-# Normalize input values
-normalized_inputs = {}
+# Input fields for user to change initial values
+user_inputs = {}
 for var in initial_values.keys():
-    try:
-        normalized_inputs[var] = (user_inputs.get(var, 0) - min_values.get(var, 0)) / (max_values.get(var, 1) - min_values.get(var, 0))
-        # Ensure values are between 0 and 1
-        normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
-    except Exception as e:
-        st.write(f"Error: {e}")
-        st.write(f"Variable {var} caused an error.")
+    if var != 'Norm_CyAN':
+        try:
+            min_val = float(min_values.get(var, 0))
+            max_val = float(max_values.get(var, 1))
+            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)))
+        except Exception as e:
+            st.write(f"Error: {e}")
+            st.write(f"Variable {var} caused an error.")
 
 # Calculate Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1)
 predicted_y1 = coefficients['intercept']
