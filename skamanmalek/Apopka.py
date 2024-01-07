@@ -3,7 +3,6 @@ import pandas as pd
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
-    'Norm_CyAN': 88.106000,
     'AVFST_Max': 88.106000,
     'ARAIN_Average': 184.16,
     'HUC12_TN': 119.289254,
