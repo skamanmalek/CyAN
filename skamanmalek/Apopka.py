@@ -42,7 +42,7 @@ coefficients = {
 }
 
 # Max of Bloom Magnitude
-max_bloom_magnitude = 2156.065284
+max_bloom_magnitude = 194.0458755
 
 # Streamlit app
 st.title('Cyanobacteria Bloom Magnitude Estimation')
