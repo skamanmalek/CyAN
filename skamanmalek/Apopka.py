@@ -2,7 +2,7 @@ import streamlit as st
 
 # Initial values according to baseline of 2022 for Lake Apopka
 initial_values = {
-    'Bloom_Magnitude': 147.180228904029,
+    'Bloom_Magnitude': 158.3693646,
     'AVFST_Max': 303.12,
     'ARAIN_Average': 184.47,
     'TN_HUC12': 132.57559,
