@@ -55,11 +55,9 @@ for var in initial_values.keys():
         try:
             min_val = float(min_values.get(var, 0))
             max_val = float(max_values.get(var, 1))
-            default_val = float(initial_values.get(var, 0))
-
             # Generate a unique key dynamically
             key = f"{var}_slider_{hash(var)}"
-            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=default_val, key=key)
+            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)), key=key)
         except Exception as e:
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
@@ -94,4 +92,21 @@ percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / ini
 # Display the final result
 st.write(f"Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022: {initial_values['Norm_CyAN']:.4f}")
 st.write(f"Predicted Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
-st.write(f"Percentage Change: {percentage_change:.2
+st.write(f"Percentage Change: {percentage_change:.2f}%")
+
+# Display a message based on the change with color
+threshold = 0.001  # Adjust this threshold as needed
+
+if abs(percentage_change) < threshold:
+    st.info("The estimated bloom magnitude remains the same.")
+elif percentage_change > 0:
+    st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
+else:
+    st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
+
+# Bar chart
+chart_data = pd.DataFrame({
+    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
+    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
+})
+st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
