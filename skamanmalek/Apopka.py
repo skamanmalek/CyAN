@@ -93,6 +93,6 @@ st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
 
 # Display a message based on the change with color
 if percentage_change < 0:
-    st.error("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
+    st.error("<div style='color: red;'>The annual magnitude of cyanobacteria bloom is predicted to decrease.</div>", unsafe_allow_html=True)
 else:
-    st.success("The annual magnitude of cyanobacteria bloom is predicted to increase.")
+    st.success("<div style='color: green;'>The annual magnitude of cyanobacteria bloom is predicted to increase.</div>", unsafe_allow_html=True)
