@@ -24,7 +24,7 @@ coefficients = {
     'HUC12_developed_area_5': -0.744617972431082
 }
 
-# Input fields for user to change initial values
+# Input fields for the user to change initial values
 user_inputs = {}
 for var in initial_values.keys():
     try:
