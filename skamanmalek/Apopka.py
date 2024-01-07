@@ -3,6 +3,7 @@ import pandas as pd
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
+    'Norm_CyAN': 88.106000,
     'AVFST_Max': 88.106000,
     'ARAIN_Average': 184.16,
     'HUC12_TN': 119.289254,
@@ -27,8 +28,8 @@ max_values = {
     'ARAIN_Average': 223.83,
     'HUC12_TN': 252.0831295,
     'HUC10_TP': 24.93183214,
-    'HUC10_cropland_area_1': 86.75640259,
-    'HUC12_developed_area_5': 79.36556518
+    'HUC10_cropland_area_1': 100,
+    'HUC12_developed_area_5': 100
 }
 
 # Coefficients for Lake Apopka
