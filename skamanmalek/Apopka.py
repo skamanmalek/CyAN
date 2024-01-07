@@ -73,8 +73,11 @@ for var in initial_values.keys():
             # Generate a unique key dynamically
             key = f"{var}_slider_{hash(var)}"
             
-            # Use slider_min_values and slider_max_values for sliders
-            user_inputs[var] = st.slider(f'Enter {var} value', min_value=slider_min_values[var], max_value=slider_max_values[var], value=float(initial_values.get(var, 0)), key=key)
+            # Convert min_value and max_value to float for consistency
+            min_val = float(slider_min_values[var])
+            max_val = float(slider_max_values[var])
+            
+            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)), key=key)
         except Exception as e:
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
