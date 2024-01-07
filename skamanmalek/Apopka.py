@@ -51,31 +51,31 @@ st.title('Cyanobacteria Bloom Magnitude Estimation')
 user_inputs = {}
 for var in initial_values.keys():
     try:
-        user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_values[var], max_value=max_values[var], value=initial_values[var])
-    except KeyError as e:
+        user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_values.get(var, 0), max_value=max_values.get(var, 1), value=initial_values.get(var, 0))
+    except Exception as e:
         st.write(f"Error: {e}")
-        st.write(f"Variable {var} not found in min_values, max_values, or initial_values.")
+        st.write(f"Variable {var} caused an error.")
 
 # Normalize input values
 normalized_inputs = {}
 for var in initial_values.keys():
     try:
-        normalized_inputs[var] = (user_inputs[var] - min_values[var]) / (max_values[var] - min_values[var])
+        normalized_inputs[var] = (user_inputs.get(var, 0) - min_values.get(var, 0)) / (max_values.get(var, 1) - min_values.get(var, 0))
         # Ensure values are between 0 and 1
         normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
-    except KeyError as e:
+    except Exception as e:
         st.write(f"Error: {e}")
-        st.write(f"Variable {var} not found in min_values or max_values.")
+        st.write(f"Variable {var} caused an error.")
 
 # Calculate Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1)
 predicted_y1 = coefficients['intercept']
 for var, coef in coefficients.items():
     if var != 'intercept':
         try:
-            predicted_y1 += coef * normalized_inputs[var]
-        except KeyError as e:
+            predicted_y1 += coef * normalized_inputs.get(var, 0)
+        except Exception as e:
             st.write(f"Error: {e}")
-            st.write(f"Variable {var} not found in normalized_inputs.")
+            st.write(f"Variable {var} caused an error.")
 
 # Calculate Cyanobacteria annual bloom magnitude
 final_bloom_magnitude = predicted_y1 * max_bloom_magnitude
