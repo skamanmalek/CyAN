@@ -1,6 +1,8 @@
 pip install pandas
-cd pandas
-python setup.py install
+pip install pandas
+pip install numpy
+pip install matplotlib.pyplot
+
 import streamlit as st
 import pandas as pd
 import numpy as np
