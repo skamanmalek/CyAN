@@ -55,11 +55,11 @@ for var in initial_values.keys():
         try:
             # Generate a unique key dynamically
             key = f"{var}_slider_{hash(var)}"
-            
-            # Convert min_value and max_value to float for consistency
-            min_val = float(min_values[var])
-            max_val = float(max_values[var])
-            
+
+            # Use slider_min_values and slider_max_values for sliders
+            min_val = float(slider_min_values.get(var, 0))
+            max_val = float(slider_max_values.get(var, 1))
+
             user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)), key=key)
         except Exception as e:
             st.write(f"Error: {e}")
@@ -78,6 +78,7 @@ predicted_y1 = coefficients['intercept']
 for var, coef in coefficients.items():
     if var != 'intercept' and var != 'Norm_CyAN':
         try:
+            # Use normalized user input values in the prediction equation
             predicted_y1 += coef * normalized_inputs.get(var, 0)
         except Exception as e:
             st.write(f"Error: {e}")
@@ -106,7 +107,6 @@ elif percentage_change > 0:
     st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
 else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
-
 
 # Bar chart
 chart_data = pd.DataFrame({
