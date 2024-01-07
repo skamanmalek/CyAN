@@ -28,8 +28,8 @@ max_values = {
     'ARAIN_Average': 223.83,
     'HUC12_TN': 252.0831295,
     'HUC10_TP': 24.93183214,
-    'HUC10_cropland_area_1': 100,
-    'HUC12_developed_area_5': 100
+    'HUC10_cropland_area_1': 86.75640259,
+    'HUC12_developed_area_5': 79.36556518
 }
 
 # Coefficients for Lake Apopka
