@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Initial values according to baseline of 2022 for Lake Apopka
 initial_values = {
