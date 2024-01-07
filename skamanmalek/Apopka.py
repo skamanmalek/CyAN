@@ -1,38 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-# Initial values according to the baseline of 2022 for Lake Apopka
-initial_values = {
-    'Norm_CyAN': 158.3693646,  # Initial value for Bloom Magnitude
-    'AVFST_Max': 304.32,
-    'ARAIN_Average': 184.16,
-    'HUC12_TN': 119.289254,
-    'HUC10_TP': 15.258894,
-    'HUC10_cropland_area_1': 3.332722,
-    'HUC12_developed_area_5': 27.275139
-}
-
-# Min and max values across all variables for normalization
-min_values = {
-    'Norm_CyAN': 0,
-    'AVFST_Max': 300.95,
-    'ARAIN_Average': 163.72,
-    'HUC12_TN': 14.37253718,
-    'HUC10_TP': 7.105387318,
-    'HUC10_cropland_area_1': 0,
-    'HUC12_developed_area_5': 0.052616068
-}
-
-max_values = {
-    'Norm_CyAN': 194.0458755,
-    'AVFST_Max': 305.85,
-    'ARAIN_Average': 223.83,
-    'HUC12_TN': 252.0831295,
-    'HUC10_TP': 24.93183214,
-    'HUC10_cropland_area_1': 86.75640259,
-    'HUC12_developed_area_5': 79.36556518
-}
-
 # Coefficients for Lake Apopka
 coefficients = {
     'intercept': 2.485492847,
@@ -44,36 +12,39 @@ coefficients = {
     'HUC12_developed_area_5': -0.744617972431082
 }
 
-# Streamlit app
-st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
-
 # Input fields for the user to change initial values
 user_inputs = {}
-normalized_inputs = {}  # Define normalized_inputs in the correct scope
-for var in initial_values.keys():
-    if var != 'Norm_CyAN':
+percentage_changes = {}
+normalized_inputs = {}
+
+for var in coefficients.keys():
+    if var != 'intercept':
         try:
             min_val = float(min_values.get(var, 0))
             max_val = float(max_values.get(var, 1))
-            # Generate a unique key dynamically
-            key = f"{var}_slider_{hash(var)}"
-            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)), key=key)
-        except Exception as e:
-            st.write(f"Error: {e}")
-            st.write(f"Variable {var} caused an error.")
 
-        try:
+            # Input box for user to add +/- percentage change
+            percentage_changes[var] = st.number_input(f'Enter percentage change for {var}', min_value=-100.0, max_value=100.0, step=1.0, key=f"{var}_percentage")
+
+            # Calculate user input based on percentage change
+            user_inputs[var] = initial_values[var] * (1 + percentage_changes[var] / 100)
+
+            # Ensure user input is within the min and max bounds
+            user_inputs[var] = max(min_val, min(max_val, user_inputs[var]))
+
             # Normalize input values and ensure they are between 0 and 1
-            normalized_inputs[var] = (user_inputs.get(var, 0) - min_values.get(var, 0)) / (max_values.get(var, 1) - min_values.get(var, 0))
+            normalized_inputs[var] = (user_inputs[var] - min_val) / (max_val - min_val)
             normalized_inputs[var] = max(0, min(1, normalized_inputs[var]))
+
         except Exception as e:
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
 
 # Calculate Predicted Cyanobacteria annual bloom magnitude_Normalized (Y1)
 predicted_y1 = coefficients['intercept']
+
 for var, coef in coefficients.items():
-    if var != 'intercept' and var != 'Norm_CyAN':
+    if var != 'intercept':
         try:
             predicted_y1 += coef * normalized_inputs.get(var, 0)
         except Exception as e:
@@ -103,7 +74,6 @@ elif percentage_change > 0:
     st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
 else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
-
 
 # Bar chart
 chart_data = pd.DataFrame({
