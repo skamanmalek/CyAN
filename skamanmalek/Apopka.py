@@ -1,12 +1,14 @@
 import streamlit as st
-
-
-# Install matplotlib if not already installed
 import subprocess
-subprocess.run(['python', '-m', 'pip', 'install', '-U', 'pip'])
-subprocess.run(['python', '-m', 'pip', 'install', '-U', 'matplotlib'])
 
-# Rest of your script...
+# Check if matplotlib is installed
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    # Install matplotlib if not already installed
+    subprocess.run(['python', '-m', 'pip', 'install', '-U', 'pip'])
+    subprocess.run(['python', '-m', 'pip', 'install', '-U', 'matplotlib'])
+    import matplotlib.pyplot as plt
 
 
 # Initial values according to baseline of 2022 for Lake Apopka
