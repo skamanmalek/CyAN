@@ -1,9 +1,4 @@
 import streamlit as st
-pip install pandas
-pip install pandas
-pip install numpy
-pip install matplotlib.pyplot
-
 import streamlit as st
 import pandas as pd
 import numpy as np
