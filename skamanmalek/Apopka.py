@@ -104,6 +104,7 @@ elif percentage_change > 0:
 else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
 
+
 # Bar chart
 chart_data = pd.DataFrame({
     'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
