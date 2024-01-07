@@ -91,10 +91,8 @@ percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / ini
 
 # Display a message based on the change
 if percentage_change > 0:
-    st.success("The estimated bloom magnitude has increased.")
     st.info("The annual magnitude of cyanobacteria bloom is predicted to increase.")
 elif percentage_change < 0:
-    st.error("The estimated bloom magnitude has decreased.")
     st.info("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
 else:
     st.info("The estimated bloom magnitude remains the same.")
