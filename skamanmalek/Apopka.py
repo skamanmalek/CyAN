@@ -84,7 +84,13 @@ predicted_y1 = max(0, min(1, predicted_y1))
 # Calculate Cyanobacteria annual bloom magnitude
 final_bloom_magnitude = predicted_y1 * max_values['Norm_CyAN']
 
-# ...
+# Calculate the percentage change
+percentage_change = ((final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN']) * 100
+
+# Display the final result
+st.write(f"Initial Bloom Magnitude: {initial_values['Norm_CyAN']:.4f}")
+st.write(f"Final Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
+st.write(f"Percentage Change: {percentage_change:.2f}%")
 
 # Display a message based on the change
 if percentage_change > 0:
@@ -95,4 +101,3 @@ elif percentage_change < 0:
     st.info("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
 else:
     st.info("The estimated bloom magnitude remains the same.")
-
