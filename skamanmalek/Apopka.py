@@ -12,7 +12,7 @@ initial_values = {
     'HUC12_developed_area_5': 27.275139
 }
 
-# Min and max values for sliders
+# Slider values
 slider_min_values = {
     'AVFST_Max': 67,
     'ARAIN_Average': 0,
@@ -38,7 +38,7 @@ coefficients = {
     'ARAIN_Average': -0.225355885697879,
     'HUC12_TN': -2.79949760100647,
     'HUC10_TP': -0.777649170971426,
-    'HUC10_cropland_area_1': 0.156721981986119,
+    'HUC10_cropland_area_1': -0.156721981986119,
     'HUC12_developed_area_5': -0.744617972431082
 }
 
