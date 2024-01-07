@@ -105,5 +105,6 @@ else:
     st.info("The estimated bloom magnitude remains the same.")
 
 # Bar chart
-chart_data = pd.DataFrame({'Initial Bloom Magnitude': [initial_values['Norm_CyAN']], 'Predicted Bloom Magnitude': [final_bloom_magnitude]})
-st.bar_chart(chart_data)
+chart_data = pd.DataFrame({
+    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
+    'Magnitude Value': [initial_values['Norm
