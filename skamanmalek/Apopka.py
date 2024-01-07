@@ -1,14 +1,17 @@
 import streamlit as st
-import subprocess
+import matplotlib
 
-# Check if matplotlib is installed
-try:
-    import matplotlib.pyplot as plt
-except ImportError:
-    # Install matplotlib if not already installed
-    subprocess.run(['python', '-m', 'pip', 'install', '-U', 'pip'])
-    subprocess.run(['python', '-m', 'pip', 'install', '-U', 'matplotlib'])
-    import matplotlib.pyplot as plt
+# Use the Agg backend for Matplotlib
+matplotlib.use('Agg')
+
+# Install matplotlib if not already installed
+import subprocess
+subprocess.run(['python', '-m', 'pip', 'install', '-U', 'pip'])
+subprocess.run(['python', '-m', 'pip', 'install', '-U', 'matplotlib'])
+import matplotlib.pyplot as plt
+
+# Rest of your script...
+
 
 
 # Initial values according to baseline of 2022 for Lake Apopka
