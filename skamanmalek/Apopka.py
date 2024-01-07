@@ -94,15 +94,14 @@ st.write(f"Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022: {ini
 st.write(f"Predicted Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
 st.write(f"Percentage Change: {percentage_change:.2f}%")
 
-# Display a message based on the change
-if percentage_change = 0:
+# Display a message based on the change with color
+if percentage_change == 0:
     st.info("The estimated bloom magnitude remains the same.")
-elifif percentage_change > 0:
-    st.error("The estimated bloom magnitude has increased.")
-    st.info("The annual magnitude of cyanobacteria bloom is predicted to increase.")
-else:
-    st.success("The estimated bloom magnitude has decreased.")
-    st.info("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
+elif percentage_change > 0:
+    st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
+else:  # No condition needed here; it should be "else:" instead of "else percentage_change < 0:"
+    st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
+
 
 # Bar chart
 chart_data = pd.DataFrame({
