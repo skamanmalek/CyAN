@@ -3,7 +3,7 @@ import pandas as pd
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
-    'Norm_CyAN': 158.3694,
+    'Norm_CyAN': 158.3694,  # Initial value for Bloom Magnitude
     'AVFST_Max': 304.32,
     'ARAIN_Average': 184.16,
     'HUC12_TN': 119.289254,
@@ -45,29 +45,19 @@ coefficients = {
 }
 
 # Streamlit app
-st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka')
+st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
 
 # Input fields for the user to change initial values
 user_inputs = {}
-normalized_inputs = {}
+normalized_inputs = {}  # Define normalized_inputs in the correct scope
 for var in initial_values.keys():
     if var != 'Norm_CyAN':
         try:
-            # Slider for the original value
-            min_val = float(min_values[var])
-            max_val = float(max_values[var])
-            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=initial_values[var])
-
-            # Text input for percentage change
-            percentage_change_input = st.text_input(f'Enter % change for {var}', value="0.0")
-
-            try:
-                # Parse percentage change input
-                percentage_change = float(percentage_change_input)
-                # Adjust user input based on percentage change, ensuring it doesn't go below the minimum value
-                user_inputs[var] = max(min_val, user_inputs[var] * (1 + percentage_change / 100))
-            except ValueError:
-                st.warning(f"Please enter a valid numerical value for % change for {var}. Using default value.")
+            min_val = float(min_values.get(var, 0))
+            max_val = float(max_values.get(var, 1))
+            # Generate a unique key dynamically
+            key = f"{var}_slider_{hash(var)}"
+            user_inputs[var] = st.slider(f'Enter {var} value', min_value=min_val, max_value=max_val, value=float(initial_values.get(var, 0)), key=key)
         except Exception as e:
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
@@ -113,6 +103,7 @@ elif percentage_change > 0:
     st.error("The annual magnitude of cyanobacteria bloom is predicted to increase.")
 else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
+
 
 # Bar chart
 chart_data = pd.DataFrame({
