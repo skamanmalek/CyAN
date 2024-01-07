@@ -79,6 +79,9 @@ for var, coef in coefficients.items():
             st.write(f"Error: {e}")
             st.write(f"Variable {var} caused an error.")
 
+# Ensure values of X1 to X6 are between 0 and 1
+predicted_y1 = max(0, min(1, predicted_y1))
+
 # Calculate Cyanobacteria annual bloom magnitude
 final_bloom_magnitude = predicted_y1 * max_bloom_magnitude
 
