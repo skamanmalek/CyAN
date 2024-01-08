@@ -86,12 +86,10 @@ elif percentage_change > 0:
     st.error("**The annual magnitude of cyanobacteria bloom is predicted to increase.**")
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
-
 # Customizing the bar chart with Altair
 c = alt.Chart(chart_data).mark_bar(size=30).encode(
-    x='Magnitude Type',
-    y='Magnitude Value',
-    color='Magnitude Type'
+    y='Cyanobacteria Bloom Magnitude',
+    color=alt.ColorValue("steelblue")  # Set bar color to steelblue
 ).configure_view(
     strokeWidth=0  # Remove chart border
 )
