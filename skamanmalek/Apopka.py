@@ -3,7 +3,7 @@ import pandas as pd
 
 # Display the title with blue color and centered text
 title_html = "<h1 style='color: blue; text-align: center;'>Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>"
-st.title(title_html, unsafe_allow_html=True)
+st.markdown(title_html, unsafe_allow_html=True)
 
 # Sidebar for user inputs
 st.sidebar.header("User Inputs")
