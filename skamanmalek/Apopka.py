@@ -91,15 +91,17 @@ else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
 
-# Bar chart
-chart_data = pd.DataFrame({
-    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
-    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
-})
+# Customizing the bar chart with Altair
+c = alt.Chart(chart_data).mark_bar(size=30).encode(
+    x='Magnitude Type',
+    y='Magnitude Value',
+    color='Magnitude Type'
+).configure_view(
+    strokeWidth=0  # Remove chart border
+)
 
 # Display the bar chart
-st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
-
+st.altair_chart(c, use_container_width=True)
 
 
 
