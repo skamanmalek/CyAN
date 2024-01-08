@@ -28,7 +28,7 @@ b1, c1, d1, e1, f1, g1 = 82.04, 163.72, 14.37253718, 7.105387318, 0, 0.052616068
 b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 252.0831295, 24.93183214, 86.75640259, 79.36556518
 
 #Slider variables:
-b3, c3, d3, e3, f3, g3 = 82.04, 163.72, 14.37253718, 7.105387318, 0, 0.052616068
+b3, c3, d3, e3, f3, g3 = 82.04, 0, 0, 0, 0, 0
 b4, c4, d4, e4, f4, g4 = 106.00, 450.00, 500.00, 50.00, 100.00, 100.00
 
 
@@ -37,8 +37,8 @@ AVFST_Max_user = st.slider("AVFST_Max User Input_°F", b3, b4, initial_values['A
 ARAIN_Average_user = st.slider("ARAIN_Average User Input_kg/m^2", c3, c4, initial_values['ARAIN_Average'])
 HUC12_TN_user = st.slider("HUC12_TN User Input_mg/L", d3, d4, initial_values['HUC12_TN'])
 HUC10_TP_user = st.slider("HUC10_TP User Input_mg/L", e3, e4, initial_values['HUC10_TP'])
-HUC10_cropland_area_user = st.slider("HUC10_cropland_area User Input", float(f3), float(f4), initial_values['HUC10_cropland_area_1'])
-HUC12_developed_area_5_user = st.slider("HUC12_developed_area_5 User Input", float(g3), float(g4), initial_values['HUC12_developed_area_5'])
+HUC10_cropland_area_user = st.slider("HUC10_cropland_area User Input_%", float(f3), float(f4), initial_values['HUC10_cropland_area_1'])
+HUC12_developed_area_5_user = st.slider("HUC12_developed_area_ User Input_%", float(g3), float(g4), initial_values['HUC12_developed_area_5'])
 
 
 
