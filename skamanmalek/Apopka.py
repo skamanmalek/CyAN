@@ -38,7 +38,7 @@ ARAIN_Average_user = st.slider("ARAIN_Average User Input_kg/m^2", c3, c4, initia
 HUC12_TN_user = st.slider("HUC12_TN User Input_mg/L", d3, d4, initial_values['HUC12_TN',step=0.1])
 HUC10_TP_user = st.slider("HUC10_TP User Input_mg/L", e3, e4, initial_values['HUC10_TP',step=0.1])
 HUC10_cropland_area_user = st.slider("HUC10_cropland_area User Input_%", float(f3), float(f4), initial_values['HUC10_cropland_area_1'],step=0.1)
-HUC12_developed_area_5_user = st.slider("HUC12_developed_area_ User Input_%", float(g3), float(g4), initial_values['HUC12_developed_area_5'],step=0.1)
+HUC12_developed_area_5_user = st.slider("HUC12_developed_area_ User Input_%", float(g3), float(g4), initial_values['HUC12_developed_area_5'])
 
 
 
