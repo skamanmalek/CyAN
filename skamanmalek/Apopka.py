@@ -85,7 +85,6 @@ else:
     st.success("The annual magnitude of cyanobacteria bloom is predicted to decrease.")
 
 # Bar chart with thinner bars and color based on prediction
-bar_color = 'red' if percentage_change > 0 else 'green'
-st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value', color=alt.condition(alt.datum.Magnitude_Type == 'Predicted Bloom Magnitude', alt.value('red'), alt.value('green')), width=50)
-
+color_condition = alt.condition(alt.datum.Magnitude_Type == 'Predicted Bloom Magnitude', alt.value('red'), alt.value('green'))
+st.altair_chart(alt.Chart(chart_data).mark_bar().encode(x='Magnitude Type', y='Magnitude Value', color=color_condition).properties(width=50))
 
