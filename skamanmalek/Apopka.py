@@ -88,7 +88,7 @@ else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
 # Customizing the bar chart with Altair
-c = alt.Chart(chart_data).mark_bar(size=40).encode(
+c = alt.Chart(chart_data).mark_bar(size=100).encode(
     x='Magnitude Type',
     y='Magnitude Value',
     color='Magnitude Type'
