@@ -61,6 +61,12 @@ percentage_change = (final_bloom_magnitude - initial_values['Norm_CyAN']) / init
 # Main content to display the output
 st.header("Model Output")
 
+# Bar chart data
+chart_data = pd.DataFrame({
+    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
+    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
+})
+
 # Display the final result
 st.write(f"Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022: {initial_values['Norm_CyAN']:.4f}")
 st.write(f"Predicted Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}")
