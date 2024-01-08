@@ -105,16 +105,6 @@ chart_data = pd.DataFrame({
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
 
-
-
-# Coordinates for Lake Apopka
-lake_apopka_coords = [28.7028, -81.6175]
-
-# Create a folium map centered around Lake Apopka
-lake_apopka_map = folium.Map(location=lake_apopka_coords, zoom_start=10)
-
-# Display the map
-st.write("## Lake Apopka on the Map")
-st.folium_chart(lake_apopka_map)
+st.image('lake_apopka.jpg', caption='Lake Apopka')
 
 
