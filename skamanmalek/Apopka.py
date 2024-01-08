@@ -68,8 +68,8 @@ Y = coefficients['intercept'] + \
 final_bloom_magnitude = Y * 194.0458755
 percentage_change = (final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN'] * 100
 
-# Main content to display the output
-st.header("Model Output")
+# Main content to display the output with an icon
+st.header("📊 Model Output")
 
 # Bar chart data
 chart_data = pd.DataFrame({
