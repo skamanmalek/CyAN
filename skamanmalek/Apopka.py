@@ -98,5 +98,6 @@ vega_lite_chart = {
 }
 
 # Display the Vega-Lite chart
-st.vega_lite_chart(vega_lite_chart, use_container_width=True)
+st.bar_chart(chart_data.set_index("Magnitude Type"))
+
 
