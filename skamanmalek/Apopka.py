@@ -95,5 +95,5 @@ c = alt.Chart(chart_data).mark_bar(size=30).encode(
 )
 
 # Display the bar chart
-st.bar_chart(chart_data.set_index("Magnitude Type"), width=40)
+st.bar_chart(chart_data.set_index("Magnitude Type"), width=10)
 
