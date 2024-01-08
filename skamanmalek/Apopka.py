@@ -88,11 +88,5 @@ if st.sidebar.button("Submit"):
     else:
         st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
-    # Bar chart
-    chart_data = pd.DataFrame({
-        'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
-        'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
-    })
-
     # Display the bar chart
     st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
