@@ -93,7 +93,7 @@ else:
 
 
 # Customizing the bar chart with Altair
-c = alt.Chart(chart_data).mark_bar(size=30).encode(
+c = alt.Chart(chart_data).mark_bar(size=40).encode(
     x='Magnitude Type',
     y='Magnitude Value',
     color='Magnitude Type'
