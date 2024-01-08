@@ -81,9 +81,8 @@ else:
 # Bar chart
 chart_data = pd.DataFrame({
     'Magnitude Type': ['Baseline 2022', 'Predicted Magnitude'],
-        'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
+    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
 })
 
-
 # Display the bar chart
-st.bar_chart(chart_data, x='Baseline VS Predicted', y='Cyanobacterial Bloom Magnitude')
+st.bar_chart(chart_data, x='Magnitude Type', y='Cyanobacterial Bloom Magnitude')
