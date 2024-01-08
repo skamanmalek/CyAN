@@ -109,11 +109,7 @@ st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
 # Coordinates for Lake Apopka
 lake_apopka_coords = [28.7028, -81.6175]
 
-# Create a folium map centered at Lake Apopka
-lake_apopka_map = folium.Map(location=lake_apopka_coords, zoom_start=10)
-
-# Add a marker for Lake Apopka
-folium.Marker(location=lake_apopka_coords, popup='Lake Apopka', icon=folium.Icon(color='blue')).add_to(lake_apopka_map)
+st.map(28.7028, -81.6175)
 
 # Display the map
 st.write("## Lake Apopka on the Map")
