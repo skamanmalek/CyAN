@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import folium
 
 # Display the title with blue color and centered text
 title_markdown = "<h1 style='color: blue; text-align: center;'>Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>"
@@ -109,9 +110,11 @@ st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
 # Coordinates for Lake Apopka
 lake_apopka_coords = [28.7028, -81.6175]
 
-st.map(28.7028, -81.6175)
+# Create a folium map centered around Lake Apopka
+lake_apopka_map = folium.Map(location=lake_apopka_coords, zoom_start=10)
 
 # Display the map
 st.write("## Lake Apopka on the Map")
-st.write(lake_apopka_map)
+st.folium_chart(lake_apopka_map)
+
 
