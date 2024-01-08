@@ -87,11 +87,8 @@ else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
 # Customizing the bar chart with Altair
-c = alt.Chart(chart_data).mark_bar(size=40).encode(
-    y='Cyanobacteria Bloom Magnitude',
-    color=alt.ColorValue("steelblue")  # Set bar color to steelblue
-).configure_view(
-    strokeWidth=0  # Remove chart border
+c = alt.Chart(chart_data).mark_bar(size=40, color='steelblue').encode(
+    y=alt.Y('Cyanobacteria Bloom Magnitude', axis=alt.Axis(title='')),
 )
 
 # Display the bar chart
