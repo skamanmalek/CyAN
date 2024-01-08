@@ -42,13 +42,14 @@ b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 252.0831295, 24.93183214, 86.75640259, 7
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
 b4, c4, d4, e4, f4, g4 = 106.00, 450.00, 500.00, 50.00, 100.00, 100.00
 
-# User Input in the sidebar
-AVFST_Max_user = st.sidebar.slider("AVFST_Max User Input_°F", b3, b4, initial_values['AVFST_Max'], step=0.1)
-ARAIN_Average_user = st.sidebar.slider("ARAIN_Average User Input_kg/m^2", c3, c4, initial_values['ARAIN_Average'], step=0.1)
-HUC12_TN_user = st.sidebar.slider("HUC12_TN User Input_mg/L", d3, d4, initial_values['HUC12_TN'], step=0.1)
-HUC10_TP_user = st.sidebar.slider("HUC10_TP User Input_mg/L", e3, e4, initial_values['HUC10_TP'], step=0.1)
-HUC10_cropland_area_user = st.sidebar.slider("HUC10_cropland_area User Input_%", float(f3), float(f4), initial_values['HUC10_cropland_area_1'], step=0.1)
-HUC12_developed_area_5_user = st.sidebar.slider("HUC12_developed_area User Input_%", float(g3), float(g4), initial_values['HUC12_developed_area_5'], step=0.1)
+# User Input in the sidebar with colorful labels
+AVFST_Max_user = st.sidebar.slider("AVFST_Max User Input_°F 🌡️", b3, b4, initial_values['AVFST_Max'], step=0.1)
+ARAIN_Average_user = st.sidebar.slider("ARAIN_Average User Input_kg/m^2 🌧️", c3, c4, initial_values['ARAIN_Average'], step=0.1)
+HUC12_TN_user = st.sidebar.slider("HUC12_TN User Input_mg/L 📊", d3, d4, initial_values['HUC12_TN'], step=0.1)
+HUC10_TP_user = st.sidebar.slider("HUC10_TP User Input_mg/L 💧", e3, e4, initial_values['HUC10_TP'], step=0.1)
+HUC10_cropland_area_user = st.sidebar.slider("HUC10_cropland_area User Input_% 🌱", float(f3), float(f4), initial_values['HUC10_cropland_area_1'], step=0.1)
+HUC12_developed_area_5_user = st.sidebar.slider("HUC12_developed_area User Input_% 🏡", float(g3), float(g4), initial_values['HUC12_developed_area_5'], step=0.1)
+
 
 # Calculate Predicted Magnitude
 Y = coefficients['intercept'] + \
