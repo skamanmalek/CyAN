@@ -7,9 +7,7 @@ title_markdown = "<h1 style='color: blue; text-align: center;'>Cyanobacteria Blo
 st.markdown(title_markdown, unsafe_allow_html=True)
 
 
-# Sidebar for user inputs
-st.sidebar.header("User Inputs:")
-st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Apopka.")
+
 
 
 # Initial values according to the baseline of 2022 for Lake Apopka
@@ -37,6 +35,12 @@ coefficients = {
 # Equations variables
 b1, c1, d1, e1, f1, g1 = 82.04, 163.72, 14.37253718, 7.105387318, 0, 0.052616068
 b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 252.0831295, 24.93183214, 86.75640259, 79.36556518
+
+
+
+# Sidebar for user inputs with icons
+st.sidebar.markdown("**🛠️ User Inputs:**")
+st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Apopka.")
 
 # Slider variables:
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
