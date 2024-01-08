@@ -8,7 +8,7 @@ st.markdown(title_markdown, unsafe_allow_html=True)
 
 
 # Sidebar for user inputs
-st.sidebar.header("User Inputs.")
+st.sidebar.header("User Inputs:")
 st.sidebar.write("The default values are mean annual values based on the baseline of 2022")
 
 
