@@ -104,7 +104,7 @@ chart_data = pd.DataFrame({
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
 
-import folium
+
 
 # Coordinates for Lake Apopka
 lake_apopka_coords = [28.7028, -81.6175]
