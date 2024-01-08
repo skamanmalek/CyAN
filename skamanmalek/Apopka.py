@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 
+st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
+
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
     'Norm_CyAN': 158.3693646,
