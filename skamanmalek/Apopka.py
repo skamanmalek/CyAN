@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import altair as alt
 
 # Display the title with blue color and centered text
 title_markdown = "<h1 style='color: blue; text-align: center;'>Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>"
@@ -32,12 +33,9 @@ coefficients = {
 b1, c1, d1, e1, f1, g1 = 82.04, 163.72, 14.37253718, 7.105387318, 0, 0.052616068
 b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 252.0831295, 24.93183214, 86.75640259, 79.36556518
 
-
-
 # Sidebar for user inputs with icons
 st.sidebar.markdown("<h2 style='font-size: 24px;'>🛠️ User Inputs:</h2>", unsafe_allow_html=True)
 st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Apopka.")
-
 
 # Slider variables:
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
@@ -50,7 +48,6 @@ HUC12_TN_user = st.sidebar.slider("**🔍 HUC12_TN_mg/L**", d3, d4, initial_valu
 HUC10_TP_user = st.sidebar.slider("**📊 HUC10_TP_mg/L**", e3, e4, initial_values['HUC10_TP'], step=0.1, key="huc10_tp", help="Adjust total phosphorus.")
 HUC10_cropland_area_user = st.sidebar.slider("**🌱 HUC10_Cropland_Area_%**", float(f3), float(f4), initial_values['HUC10_cropland_area_1'], step=0.1, key="huc10_cropland", help="Adjust % cropland area.")
 HUC12_developed_area_5_user = st.sidebar.slider("**🏡 HUC12_Developed_Area_%**", float(g3), float(g4), initial_values['HUC12_developed_area_5'], step=0.1, key="huc12_developed", help="Adjust % developed area.")
-
 
 # Calculate Predicted Magnitude
 Y = coefficients['intercept'] + \
@@ -90,7 +87,6 @@ elif percentage_change > 0:
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
-
 # Customizing the bar chart with Altair
 c = alt.Chart(chart_data).mark_bar(size=30).encode(
     x='Magnitude Type',
@@ -102,6 +98,3 @@ c = alt.Chart(chart_data).mark_bar(size=30).encode(
 
 # Display the bar chart
 st.altair_chart(c, use_container_width=True)
-
-
-
