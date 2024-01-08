@@ -1,7 +1,15 @@
 import streamlit as st
 import pandas as pd
 
-st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka ')
+# Custom CSS style for the title
+title_style = "<style>h1 {color: purple;}</style>"
+
+# Display the custom style
+st.markdown(title_style, unsafe_allow_html=True)
+
+# Rest of your Streamlit app code
+st.title('Cyanobacteria Bloom Magnitude Estimation in <font color="purple">Lake Apopka</font> ')
+
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
