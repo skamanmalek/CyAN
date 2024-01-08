@@ -94,9 +94,8 @@ else:
 
 # Customizing the bar chart with Altair
 c = alt.Chart(chart_data).mark_bar(size=40).encode(
-    x='Magnitude Type',
-    y='Magnitude Value',
-    color='Magnitude Type'
+    y='Cyanobacteria Bloom Magnitude',
+    color=alt.ColorValue("steelblue")  # Set bar color to steelblue
 ).configure_view(
     strokeWidth=0  # Remove chart border
 )
