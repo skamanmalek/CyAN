@@ -32,9 +32,12 @@ coefficients = {
 b1, c1, d1, e1, f1, g1 = 82.04, 163.72, 14.37253718, 7.105387318, 0, 0.052616068
 b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 252.0831295, 24.93183214, 86.75640259, 79.36556518
 
+
+
 # Sidebar for user inputs with icons
 st.sidebar.markdown("<h2 style='font-size: 24px;'>🛠️ User Inputs:</h2>", unsafe_allow_html=True)
 st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Apopka.")
+
 
 # Slider variables:
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
@@ -48,45 +51,55 @@ HUC10_TP_user = st.sidebar.slider("**📊 HUC10_TP_mg/L**", e3, e4, initial_valu
 HUC10_cropland_area_user = st.sidebar.slider("**🌱 HUC10_Cropland_Area_%**", float(f3), float(f4), initial_values['HUC10_cropland_area_1'], step=0.1, key="huc10_cropland", help="Adjust % cropland area.")
 HUC12_developed_area_5_user = st.sidebar.slider("**🏡 HUC12_Developed_Area_%**", float(g3), float(g4), initial_values['HUC12_developed_area_5'], step=0.1, key="huc12_developed", help="Adjust % developed area.")
 
-# Submit button
-if st.sidebar.button("Submit"):
-    # Calculate Predicted Magnitude
-    Y = coefficients['intercept'] + \
-        coefficients['AVFST_Max'] * (AVFST_Max_user - b1) / (b2 - b1) + \
-        coefficients['ARAIN_Average'] * (ARAIN_Average_user - c1) / (c2 - c1) + \
-        coefficients['HUC12_TN'] * (HUC12_TN_user - d1) / (d2 - d1) + \
-        coefficients['HUC10_TP'] * (HUC10_TP_user - e1) / (e2 - e1) + \
-        coefficients['HUC10_cropland_area_1'] * (HUC10_cropland_area_user - f1) / (f2 - f1) + \
-        coefficients['HUC12_developed_area_5'] * (HUC12_developed_area_5_user - g1) / (g2 - g1)
 
-    final_bloom_magnitude = Y * 194.0458755
-    percentage_change = (final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN'] * 100
+# Calculate Predicted Magnitude
+Y = coefficients['intercept'] + \
+    coefficients['AVFST_Max'] * (AVFST_Max_user - b1) / (b2 - b1) + \
+    coefficients['ARAIN_Average'] * (ARAIN_Average_user - c1) / (c2 - c1) + \
+    coefficients['HUC12_TN'] * (HUC12_TN_user - d1) / (d2 - d1) + \
+    coefficients['HUC10_TP'] * (HUC10_TP_user - e1) / (e2 - e1) + \
+    coefficients['HUC10_cropland_area_1'] * (HUC10_cropland_area_user - f1) / (f2 - f1) + \
+    coefficients['HUC12_developed_area_5'] * (HUC12_developed_area_5_user - g1) / (g2 - g1)
 
-    # Main content to display the output with an icon
-    st.header("📈 Model Output")
+final_bloom_magnitude = Y * 194.0458755
+percentage_change = (final_bloom_magnitude - initial_values['Norm_CyAN']) / initial_values['Norm_CyAN'] * 100
 
-    # Bar chart data
-    chart_data = pd.DataFrame({
-        'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
-        'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
-    })
+# Main content to display the output with an icon
+st.header("📈 Model Output")
 
-    # Display the final result with bold text
-    st.write(f"**Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022:** {initial_values['Norm_CyAN']:.4f}")
-    st.write(f"**Predicted Cyanobacteria Bloom Magnitude:** {final_bloom_magnitude:.4f}")
+# Bar chart data
+chart_data = pd.DataFrame({
+    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
+    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
+})
 
-    # Display the percentage change with bold text
-    st.write(f"**Percentage Change:** {percentage_change:.2f}%")
+# Display the final result with bold text
+st.write(f"**Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022:** {initial_values['Norm_CyAN']:.4f}")
+st.write(f"**Predicted Cyanobacteria Bloom Magnitude:** {final_bloom_magnitude:.4f}")
 
-    # Display a message based on the change with color and bold text
-    threshold = 0.001
+# Display the percentage change with bold text
+st.write(f"**Percentage Change:** {percentage_change:.2f}%")
 
-    if abs(percentage_change) < threshold:
-        st.info("**The estimated bloom magnitude remains the same.**")
-    elif percentage_change > 0:
-        st.error("**The annual magnitude of cyanobacteria bloom is predicted to increase.**")
-    else:
-        st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
+# Display a message based on the change with color and bold text
+threshold = 0.001
 
-    # Display the bar chart
-    st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
+if abs(percentage_change) < threshold:
+    st.info("**The estimated bloom magnitude remains the same.**")
+elif percentage_change > 0:
+    st.error("**The annual magnitude of cyanobacteria bloom is predicted to increase.**")
+else:
+    st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
+
+
+# Bar chart
+chart_data = pd.DataFrame({
+    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
+    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
+})
+
+# Display the bar chart
+st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
+
+
+
+
