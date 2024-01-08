@@ -9,7 +9,7 @@ st.markdown(title_markdown, unsafe_allow_html=True)
 
 # Sidebar for user inputs
 st.sidebar.header("User Inputs:")
-st.sidebar.write("The default values are mean annual values based on the baseline of 2022")
+st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Apopka.")
 
 
 # Initial values according to the baseline of 2022 for Lake Apopka
