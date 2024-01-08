@@ -99,7 +99,3 @@ chart_data = pd.DataFrame({
 
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
-
-
-
-
