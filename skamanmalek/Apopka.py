@@ -93,5 +93,5 @@ chart_data = pd.DataFrame({
 })
 
 # Display the bar chart
-st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value',color=None, width=10, height=0, use_container_width=True)
+st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value',color=["#fd0", "#f0f"], width=10, height=0, use_container_width=True)
 
