@@ -1,10 +1,12 @@
-
 import streamlit as st
 import pandas as pd
 
 # Display the title with purple color
-st.markdown("<h1 style='color: purple;'>Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>", unsafe_allow_html=True)
-
+st.title('Cyanobacteria Bloom Magnitude Estimation in Lake Apopka')
+st.markdown(
+    "<h1 style='color: purple; text-align: center;'>Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>",
+    unsafe_allow_html=True
+)
 
 
 # Initial values according to the baseline of 2022 for Lake Apopka
