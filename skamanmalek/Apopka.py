@@ -95,7 +95,7 @@ else:
 # Customizing the bar chart with Altair
 c = alt.Chart(chart_data).mark_bar(size=30).encode(
     x='Magnitude Type',
-    y='Magnitude Value',
+    y='Cyanobacterial Bloom Magnitude',
     color='Magnitude Type'
 ).configure_view(
     strokeWidth=0  # Remove chart border
