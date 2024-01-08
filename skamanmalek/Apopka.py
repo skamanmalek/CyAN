@@ -69,22 +69,23 @@ chart_data = pd.DataFrame({
     'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
 })
 
-# Display the final result
-st.write(f"<p style='font-weight: bold;'>Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022: {initial_values['Norm_CyAN']:.4f}</p>")
-st.write(f"<p style='font-weight: bold;'>Predicted Cyanobacteria Bloom Magnitude: {final_bloom_magnitude:.4f}</p>")
+# Display the final result with bold text
+st.write(f"**Initial Cyanobacteria Bloom Magnitude with the Baseline of 2022:** {initial_values['Norm_CyAN']:.4f}")
+st.write(f"**Predicted Cyanobacteria Bloom Magnitude:** {final_bloom_magnitude:.4f}")
 
-# Display the percentage change
-st.write(f"<p style='font-weight: bold;'>Percentage Change: {percentage_change:.2f}%</p>")
+# Display the percentage change with bold text
+st.write(f"**Percentage Change:** {percentage_change:.2f}%")
 
-# Display a message based on the change with color
+# Display a message based on the change with color and bold text
 threshold = 0.001
 
 if abs(percentage_change) < threshold:
-    st.info("<p style='font-weight: bold;'>The estimated bloom magnitude remains the same.</p>")
+    st.info("**The estimated bloom magnitude remains the same.**")
 elif percentage_change > 0:
-    st.error("<p style='font-weight: bold;'>The annual magnitude of cyanobacteria bloom is predicted to increase.</p>")
+    st.error("**The annual magnitude of cyanobacteria bloom is predicted to increase.**")
 else:
-    st.success("<p style='font-weight: bold;'>The annual magnitude of cyanobacteria bloom is predicted to decrease.</p>")
+    st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
+
 
 # Bar chart
 chart_data = pd.DataFrame({
