@@ -86,10 +86,17 @@ elif percentage_change > 0:
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
-# Customizing the bar chart with Altair
-c = alt.Chart(chart_data).mark_bar(size=40, color='steelblue').encode(
-    y=alt.Y('Cyanobacteria Bloom Magnitude', axis=alt.Axis(title='')),
-)
+# Customizing the bar chart with Vega-Lite
+vega_lite_chart = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {"values": chart_data.to_dict(orient="records")},
+    "mark": "bar",
+    "encoding": {
+        "y": {"field": "Magnitude Value", "type": "quantitative", "axis": {"title": "Cyanobacteria Bloom Magnitude"}},
+        "color": {"field": "Magnitude Type", "type": "nominal"}
+    },
+}
 
-# Display the bar chart
-st.altair_chart(c, use_container_width=True)
+# Display the Vega-Lite chart
+st.vega_lite_chart(vega_lite_chart, use_container_width=True)
+
