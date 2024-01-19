@@ -7,7 +7,7 @@ title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacte
 st.markdown(title_markdown, unsafe_allow_html=True)
 
 # Initial values according to the baseline for Lake George
-initial_values_george = {
+initial_values = {
     'Norm_CyAN': 69.42968822,
     'AVFST_Max': 86.45,
     'ARAIN_Average': 174.55,
@@ -18,7 +18,7 @@ initial_values_george = {
 }
 
 # Coefficients for Lake George
-coefficients_george = {
+coefficients = {
     'intercept': 0.024761321,
     'AVFST_Max': 0.424043982,
     'ARAIN_Average': 0.162870001,
