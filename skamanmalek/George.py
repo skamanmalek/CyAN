@@ -8,7 +8,7 @@ st.markdown(title_markdown, unsafe_allow_html=True)
 
 # Initial values according to the baseline for Lake George
 initial_values = {
-    'Norm_CyAN': 42.66964936,
+    'Norm_CyAN': 154.8514,
     'AVFST_Max': 86.45,
     'ARAIN_Average': 174.55,
     'HUC12_TN': 40.63006278,
