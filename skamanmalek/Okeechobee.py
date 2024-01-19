@@ -8,24 +8,24 @@ st.markdown(title_markdown, unsafe_allow_html=True)
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
-    'Norm_CyAN': 158.3693646,
-    'AVFST_Max': 88.106000,
-    'ARAIN_Average': 184.16,
-    'HUC12_TN': 119.289254,
-    'HUC10_TP': 15.258894,
-    'HUC10_cropland_area_1': 3.332722,
-    'HUC12_developed_area_5': 27.275139
+    'Norm_CyAN': 16.47732909,
+    'AVFST_Max': 85.55,
+    'ARAIN_Average': 192.03,
+    'HUC12_TN': 82.19243299,
+    'HUC10_TP': 15.48724269,
+    'HUC10_cropland_area_1': 11.51318437,
+    'HUC12_developed_area_5': 2.959581041
 }
 
 # Coefficients for Lake Apopka
 coefficients = {
-    'intercept': 1.485492847,
-    'AVFST_Max': 0.360760140263049,
-    'ARAIN_Average': 0.225355885697879,
-    'HUC12_TN': 0.79949760100647,
-    'HUC10_TP': 0.777649170971426,
-    'HUC10_cropland_area_1': 0.156721981986119,
-    'HUC12_developed_area_5': 0.744617972431082
+    'intercept': 0.498361341,
+    'AVFST_Max': 0.162975996,
+    'ARAIN_Average': 0.368312685,
+    'HUC12_TN': 0.366064535,
+    'HUC10_TP': 1.678937485,
+    'HUC10_cropland_area_1': 0.30046161,
+    'HUC12_developed_area_5': 1.994119072
 }
 
 # Equations variables
