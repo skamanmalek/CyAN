@@ -20,9 +20,9 @@ initial_values = {
 # Coefficients for Lake Apopka
 coefficients = {
     'intercept': 0.118361341,
-    'AVFST_Max': 0.162975996,
+    'AVFST_Max': 0.102975996,
     'ARAIN_Average': 0.368312685,
-    'HUC12_TN': 0.366064535,
+    'HUC12_TN': 0.266064535,
     'HUC10_TP': 0.478937485,
     'HUC10_cropland_area_1': 0.30046161,
     'HUC12_developed_area_5': 0.994119072
