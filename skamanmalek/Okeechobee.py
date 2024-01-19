@@ -8,7 +8,7 @@ st.markdown(title_markdown, unsafe_allow_html=True)
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
-    'Norm_CyAN': 16.47732909,
+    'Norm_CyAN': 112.9748,
     'AVFST_Max': 85.55,
     'ARAIN_Average': 192.03,
     'HUC12_TN': 82.19243299,
