@@ -8,17 +8,6 @@ st.markdown(title_markdown, unsafe_allow_html=True)
 
 # Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
-    'Norm_CyAN': 4.549010771,
-    'AVFST_Max': 86.36,
-    'ARAIN_Average': 209.22,
-    'HUC12_TN': 73.6433821,
-    'HUC10_TP': 11.97515674,
-    'HUC10_cropland_area_1': 0.300320475,
-    'HUC12_developed_area_5': 23.06545779
-}
-
-# Coefficients for Lake Apopka
-coefficients = {
     'intercept': -0.705691884,
     'AVFST_Max': -0.064113312,
     'ARAIN_Average': 0.013554092,
@@ -26,6 +15,17 @@ coefficients = {
     'HUC10_TP': 3.251485488,
     'HUC10_cropland_area_1': -0.108026466,
     'HUC12_developed_area_5': 1.791915403
+}
+
+# Coefficients for Lake Apopka
+coefficients = {
+    'intercept': 2.485492847,
+    'AVFST_Max': 0.360760140263049,
+    'ARAIN_Average': -0.225355885697879,
+    'HUC12_TN': -2.79949760100647,
+    'HUC10_TP': -0.777649170971426,
+    'HUC10_cropland_area_1': 0.156721981986119,
+    'HUC12_developed_area_5': -0.744617972431082
 }
 
 # Equations variables
@@ -99,7 +99,3 @@ chart_data = pd.DataFrame({
 
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
-
-
-
-
