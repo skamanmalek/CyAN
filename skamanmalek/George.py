@@ -23,8 +23,8 @@ coefficients = {
     'AVFST_Max': 0.424043982,
     'ARAIN_Average': 0.162870001,
     'HUC12_TN': 1.821267137,
-    'HUC10_TP': -1.924031772,
-    'HUC10_cropland_area_1': -0.359791019,
+    'HUC10_TP': 1.924031772,
+    'HUC10_cropland_area_1': 0.359791019,
     'HUC12_developed_area_5': 0.490746293
 }
 
