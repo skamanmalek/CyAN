@@ -36,7 +36,7 @@ b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 252.0831295, 24.93183214, 86.75640259, 7
 
 # Sidebar for user inputs with icons
 st.sidebar.markdown("<h2 style='font-size: 24px;'>🛠️ User Inputs:</h2>", unsafe_allow_html=True)
-st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Norris Apopka.")
+st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Norris.")
 
 
 # Slider variables:
