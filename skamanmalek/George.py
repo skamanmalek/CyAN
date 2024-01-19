@@ -6,7 +6,7 @@ import numpy as np
 title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake George</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 
-# Initial values according to the baseline of 2022 for Lake Apopka
+# Initial values according to the baseline for Lake George
 initial_values_george = {
     'Norm_CyAN': 69.42968822,
     'AVFST_Max': 86.45,
@@ -99,3 +99,7 @@ chart_data = pd.DataFrame({
 
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
+
+
+
+
