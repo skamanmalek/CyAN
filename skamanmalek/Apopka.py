@@ -87,8 +87,3 @@ elif percentage_change > 0:
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
-# Bar chart
-st.header("Bar Chart")
-
-# Display the bar chart
-st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value', key="initial_chart")
