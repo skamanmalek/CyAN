@@ -41,12 +41,12 @@ b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
 b4, c4, d4, e4, f4, g4 = 106.00, 450.00, 100.00, 100.00, 100.00, 100.00
 
 # User Input in the sidebar with colorful labels
-AVFST_Max_user = st.sidebar.slider("**🌡️ AVFST_Max_°F**", b3, b4, initial_values['AVFST_Max'], step=0.1, key="avfst_max", help="Adjust max air temperature.")
-ARAIN_Average_user = st.sidebar.slider("**🌧️ ARAIN_Average_kg/m^2**", c3, c4, initial_values['ARAIN_Average'], step=0.1, key="arain_average", help="Adjust average rainfall.")
-HUC12_forest_and_shrubland_4_user = st.sidebar.slider("**🌲 HUC12_Forest_and_Shrubland_%**", d3, d4, initial_values['HUC12_forest_and_shrubland_4'], step=0.1, key="huc12_forest_shrubland", help="Modify the percentage of forest and shrubland within the HUC12 watershed encompassing the lake.")
-HUC10_grassland_and_pasture_3_user = st.sidebar.slider("**🌾 HUC10_Grassland_and_Pasture_%**", e3, e4, initial_values['HUC10_grassland_and_pasture_3'], step=0.1, key="huc10_grassland_pasture", help="Modify the percentage of grassland and pasture within the HUC10 watershed encompassing the lake.")
-HUC10_cropland_area_user = st.sidebar.slider("**🌱 HUC10_Cropland_Area_%**", float(f3), float(f4), initial_values['HUC10_cropland_area_1'], step=0.1, key="huc10_cropland", help="Modify the percentage of cropland within the HUC10 watershed encompassing the lake.")
-HUC12_developed_area_5_user = st.sidebar.slider("**🏡 HUC12_Developed_Area_%**", float(g3), float(g4), initial_values['HUC12_developed_area_5'], step=0.1, key="huc12_developed", help="Modify the percentage of developed area within the HUC12 watershed encompassing the lake.")
+AVFST_Max_user = st.sidebar.slider("**🌡️ AVFST_Max_°F**", b3, b4, initial_values['AVFST_Max'], step=0.1, key="avfst_max", help="Adjust the annual maximum air temperature.")
+ARAIN_Average_user = st.sidebar.slider("**🌧️ ARAIN_Average_kg/m^2**", c3, c4, initial_values['ARAIN_Average'], step=0.1, key="arain_average", help="Adjust the annual average rainfall.")
+HUC12_forest_and_shrubland_4_user = st.sidebar.slider("**🌲 HUC12_Forest_and_Shrubland_%**", d3, d4, initial_values['HUC12_forest_and_shrubland_4'], step=0.1, key="huc12_forest_shrubland", help="Modify the percentage of forest and shrubland within the HUC12 watershed enclosing the lake.")
+HUC10_grassland_and_pasture_3_user = st.sidebar.slider("**🌾 HUC10_Grassland_and_Pasture_%**", e3, e4, initial_values['HUC10_grassland_and_pasture_3'], step=0.1, key="huc10_grassland_pasture", help="Modify the percentage of grassland and pasture within the HUC10 watershed enclosing the lake.")
+HUC10_cropland_area_user = st.sidebar.slider("**🌱 HUC10_Cropland_Area_%**", float(f3), float(f4), initial_values['HUC10_cropland_area_1'], step=0.1, key="huc10_cropland", help="Modify the percentage of cropland within the HUC10 watershed enclosing the lake.")
+HUC12_developed_area_5_user = st.sidebar.slider("**🏡 HUC12_Developed_Area_%**", float(g3), float(g4), initial_values['HUC12_developed_area_5'], step=0.1, key="huc12_developed", help="Modify the percentage of developed area within the HUC12 watershed enclosing the lake.")
 
 # Calculate Predicted Magnitude
 Y = coefficients['intercept'] + \
