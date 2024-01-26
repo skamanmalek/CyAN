@@ -1,4 +1,12 @@
 import matplotlib
+matplotlib.use('Agg')
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+import matplotlib
 matplotlib.use('Agg')  # Use Agg backend for compatibility with Streamlit
 import streamlit as st
 import pandas as pd
