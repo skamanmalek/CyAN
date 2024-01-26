@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
 # Display the title with blue color and centered text
 title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>"
@@ -87,3 +86,11 @@ elif percentage_change > 0:
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
+# Bar chart
+chart_data = pd.DataFrame({
+    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
+    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
+})
+
+# Display the bar chart
+st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
