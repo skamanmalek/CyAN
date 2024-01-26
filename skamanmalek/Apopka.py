@@ -1,6 +1,9 @@
+import matplotlib
+matplotlib.use('Agg')  # Use Agg backend for compatibility with Streamlit
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Display the title with blue color and centered text
 title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>"
