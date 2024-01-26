@@ -86,26 +86,11 @@ elif percentage_change > 0:
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
-# Bar chart data
+# Bar chart
 chart_data = pd.DataFrame({
     'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
     'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
 })
 
-# Set color based on change direction
-bar_colors = ['green' if final_bloom_magnitude < initial_values['Norm_CyAN'] else 'red']
-
-# Create a custom HTML representation of the bar chart
-bar_chart_html = f"""
-    <div style="display: flex; align-items: center; justify-content: space-around;">
-        <div style="background-color: {bar_colors[0]}; height: {abs(chart_data['Magnitude Value'][0]) * 5}px; width: 50px; text-align: center;">
-            {chart_data['Magnitude Value'][0]}
-        </div>
-        <div style="background-color: {bar_colors[1]}; height: {abs(chart_data['Magnitude Value'][1]) * 5}px; width: 50px; text-align: center;">
-            {chart_data['Magnitude Value'][1]}
-        </div>
-    </div>
-"""
-
-# Display the custom bar chart using st.markdown
-st.markdown(bar_chart_html, unsafe_allow_html=True)
+# Display the bar chart
+st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
