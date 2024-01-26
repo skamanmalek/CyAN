@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 # Display the title with blue color and centered text
-title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Ashby</h1>"
+title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 
 # Initial values according to the baseline of 2022 for Lake Apopka
@@ -34,7 +34,7 @@ b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 80.3992991, 81.38497115, 86.75640259, 79
 
 # Sidebar for user inputs with icons
 st.sidebar.markdown("<h2 style='font-size: 24px;'>🛠️ User Inputs:</h2>", unsafe_allow_html=True)
-st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Ashby.")
+st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Apopka.")
 
 # Slider variables:
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
