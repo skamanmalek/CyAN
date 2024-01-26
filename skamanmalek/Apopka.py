@@ -1,10 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib
-matplotlib.use('Agg')  # Set the Agg backend explicitly
-import matplotlib.pyplot as plt
-
 
 
 # Display the title with blue color and centered text
