@@ -94,14 +94,21 @@ chart_data = pd.DataFrame({
 # Set color based on change direction
 bar_colors = ['green' if final_bloom_magnitude < initial_values['Norm_CyAN'] else 'red']
 
-# Display the bar chart with custom styling
-st.bar_chart(np.array([chart_data['Magnitude Value']]), color=bar_colors, width=400, height=300)
+# Display the bar chart with custom styling using Matplotlib
+fig, ax = plt.subplots(figsize=(8, 6))
+bars = ax.bar(chart_data['Magnitude Type'], chart_data['Magnitude Value'], color=bar_colors)
 
-# Add labels and style to the bar chart
-st.pyplot(plt.figure())
-plt.bar(chart_data['Magnitude Type'], chart_data['Magnitude Value'], color=bar_colors)
-plt.xlabel('Magnitude Type')
-plt.ylabel('Magnitude Value')
-plt.title('Bloom Magnitude Comparison')
-plt.xticks(rotation=45)
-st.pyplot(plt.gcf())
+# Customize the appearance of the chart
+ax.set_ylabel('Magnitude Value')
+ax.set_xlabel('Magnitude Type')
+ax.set_title('Bloom Magnitude Comparison')
+ax.tick_params(axis='both', which='major', labelsize=12)
+ax.grid(axis='y', linestyle='--', alpha=0.7)
+
+# Add data labels to the bars
+for bar, value in zip(bars, chart_data['Magnitude Value']):
+    yval = value + 0.02 if value >= 0 else value - 0.02
+    ax.text(bar.get_x() + bar.get_width() / 2, yval, f'{value:.2f}', ha='center', va='bottom', fontsize=12)
+
+# Show the chart using st.pyplot
+st.pyplot(fig)
