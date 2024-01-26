@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Display the title with blue color and centered text
 title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Apopka</h1>"
@@ -87,10 +88,33 @@ else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
 # Bar chart
-chart_data = pd.DataFrame({
-    'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
-    'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
-})
+st.header("Bar Chart")
 
 # Display the bar chart
-st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
+st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value', key="initial_chart")
+
+# Additional line chart example
+st.header("Additional Graphs")
+
+# Additional line chart data
+line_chart_data = pd.DataFrame({
+    'X-axis': [1, 2, 3, 4, 5],
+    'Y-axis': [10, 23, 45, 67, 89]
+})
+
+# Display additional line chart
+st.line_chart(line_chart_data)
+
+# Improved bar chart with labels and style
+st.header("Improved Bar Chart")
+
+# Display the improved bar chart with labels and style
+st.bar_chart(improved_chart_data, x='Magnitude Type', y='Magnitude Value', key="improved_chart", use_container_width=True)
+
+# Add labels and style to the bar chart
+st.pyplot(plt.figure())
+plt.bar(improved_chart_data['Magnitude Type'], improved_chart_data['Magnitude Value'], color=['blue', 'green'])
+plt.xlabel('Magnitude Type')
+plt.ylabel('Magnitude Value')
+plt.title('Improved Bar Chart')
+st.pyplot(plt.gcf())
