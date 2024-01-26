@@ -87,33 +87,17 @@ elif percentage_change > 0:
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
-# Bar chart
-st.header("Bar Chart")
-
-# Display the bar chart
-st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value', key="initial_chart")
-
-# Additional line chart example
-st.header("Additional Graphs")
-
-# Additional line chart data
-line_chart_data = pd.DataFrame({
-    'X-axis': [1, 2, 3, 4, 5],
-    'Y-axis': [10, 23, 45, 67, 89]
-})
-
-# Display additional line chart
-st.line_chart(line_chart_data)
-
-# Improved bar chart with labels and style
 st.header("Improved Bar Chart")
 
+# Determine bar color based on the change direction
+bar_color = 'red' if percentage_change > 0 else 'green'
+
 # Display the improved bar chart with labels and style
-st.bar_chart(improved_chart_data, x='Magnitude Type', y='Magnitude Value', key="improved_chart", use_container_width=True)
+st.bar_chart(improved_chart_data, x='Magnitude Type', y='Magnitude Value', key="improved_chart", use_container_width=True, color=bar_color)
 
 # Add labels and style to the bar chart
 st.pyplot(plt.figure())
-plt.bar(improved_chart_data['Magnitude Type'], improved_chart_data['Magnitude Value'], color=['blue', 'green'])
+plt.bar(improved_chart_data['Magnitude Type'], improved_chart_data['Magnitude Value'], color=bar_color)
 plt.xlabel('Magnitude Type')
 plt.ylabel('Magnitude Value')
 plt.title('Improved Bar Chart')
