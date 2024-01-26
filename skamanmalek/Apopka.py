@@ -86,11 +86,22 @@ elif percentage_change > 0:
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
-# Bar chart
 chart_data = pd.DataFrame({
     'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
     'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
 })
 
-# Display the bar chart
-st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
+# Set color based on change direction
+bar_colors = ['green' if final_bloom_magnitude < initial_values['Norm_CyAN'] else 'red']
+
+# Display the bar chart with custom styling
+st.bar_chart(np.array([chart_data['Magnitude Value']]), color=bar_colors, width=400, height=300)
+
+# Add labels and style to the bar chart
+st.pyplot(plt.figure())
+plt.bar(chart_data['Magnitude Type'], chart_data['Magnitude Value'], color=bar_colors)
+plt.xlabel('Magnitude Type')
+plt.ylabel('Magnitude Value')
+plt.title('Bloom Magnitude Comparison')
+plt.xticks(rotation=45)
+st.pyplot(plt.gcf())
