@@ -86,6 +86,7 @@ elif percentage_change > 0:
 else:
     st.success("**The annual magnitude of cyanobacteria bloom is predicted to decrease.**")
 
+# Bar chart data
 chart_data = pd.DataFrame({
     'Magnitude Type': ['Initial Bloom Magnitude', 'Predicted Bloom Magnitude'],
     'Magnitude Value': [initial_values['Norm_CyAN'], final_bloom_magnitude]
@@ -94,21 +95,17 @@ chart_data = pd.DataFrame({
 # Set color based on change direction
 bar_colors = ['green' if final_bloom_magnitude < initial_values['Norm_CyAN'] else 'red']
 
-# Display the bar chart with custom styling using Matplotlib
-fig, ax = plt.subplots(figsize=(8, 6))
-bars = ax.bar(chart_data['Magnitude Type'], chart_data['Magnitude Value'], color=bar_colors)
+# Create a custom HTML representation of the bar chart
+bar_chart_html = f"""
+    <div style="display: flex; align-items: center; justify-content: space-around;">
+        <div style="background-color: {bar_colors[0]}; height: {abs(chart_data['Magnitude Value'][0]) * 5}px; width: 50px; text-align: center;">
+            {chart_data['Magnitude Value'][0]}
+        </div>
+        <div style="background-color: {bar_colors[1]}; height: {abs(chart_data['Magnitude Value'][1]) * 5}px; width: 50px; text-align: center;">
+            {chart_data['Magnitude Value'][1]}
+        </div>
+    </div>
+"""
 
-# Customize the appearance of the chart
-ax.set_ylabel('Magnitude Value')
-ax.set_xlabel('Magnitude Type')
-ax.set_title('Bloom Magnitude Comparison')
-ax.tick_params(axis='both', which='major', labelsize=12)
-ax.grid(axis='y', linestyle='--', alpha=0.7)
-
-# Add data labels to the bars
-for bar, value in zip(bars, chart_data['Magnitude Value']):
-    yval = value + 0.02 if value >= 0 else value - 0.02
-    ax.text(bar.get_x() + bar.get_width() / 2, yval, f'{value:.2f}', ha='center', va='bottom', fontsize=12)
-
-# Show the chart using st.pyplot
-st.pyplot(fig)
+# Display the custom bar chart using st.markdown
+st.markdown(bar_chart_html, unsafe_allow_html=True)
