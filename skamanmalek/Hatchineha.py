@@ -3,27 +3,26 @@ import pandas as pd
 import numpy as np
 
 # Display the title with blue color and centered text
-title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Hart</h1>"
+title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Hatchineha</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 # Data for Alligator Lake
-initial_values = {
-    'Norm_CyAN': 8.007635537,
-    'AVFST_Max': 85.874,
-    'ARAIN_Average': 185.01,
-    'HUC12_forest_and_shrubland_4': 6.17509932,
-    'HUC10_grassland_and_pasture_3': 6.753999684,
-    'HUC10_cropland_area_1': 0.555522157,
-    'HUC12_developed_area_5': 25.61890534
+    'Norm_CyAN': 23.38830076,
+    'AVFST_Max': 85.568,
+    'ARAIN_Average': 179.57,
+    'HUC12_forest_and_shrubland_4': 6.055784808,
+    'HUC10_grassland_and_pasture_3': 13.58741201,
+    'HUC10_cropland_area_1': 13.24733314,
+    'HUC12_developed_area_5': 1.921614072
 }
 
 coefficients = {
-    'intercept': -0.07404953,
-    'AVFST_Max': -0.060058847,
-    'ARAIN_Average': 0.080418657,
-    'HUC12_forest_and_shrubland_4': 0.230639177,
-    'HUC10_grassland_and_pasture_3': 0.09905244,
-    'HUC10_cropland_area_1': 0.028797264,
-    'HUC12_developed_area_5': 0.269341864
+    'intercept': 0.42041709,
+    'AVFST_Max': -0.198661428,
+    'ARAIN_Average': -0.098706768,
+    'HUC12_forest_and_shrubland_4': 0.704519133,
+    'HUC10_grassland_and_pasture_3': -0.790682561,
+    'HUC10_cropland_area_1': -0.48515346,
+    'HUC12_developed_area_5': -1.755733948
 }
 
 # Equations variables
@@ -32,7 +31,7 @@ b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 80.3992991, 81.38497115, 86.75640259, 79
 
 # Sidebar for user inputs with icons
 st.sidebar.markdown("<h2 style='font-size: 24px;'>🛠️ User Inputs:</h2>", unsafe_allow_html=True)
-st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Hart.")
+st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Hatchineha.")
  
 # Slider variables:
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
@@ -92,4 +91,3 @@ chart_data = pd.DataFrame({
 
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
-
