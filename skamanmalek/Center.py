@@ -103,4 +103,3 @@ st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
 
 
 
-
