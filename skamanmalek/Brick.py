@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 
 # Display the title with blue color and centered text
-title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Brick Lake/h1>"
+title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Brick Lake</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
-
 # Data for Alligator Lake
 initial_values = {
     'Norm_CyAN': 8.439759843,
