@@ -6,25 +6,27 @@ import numpy as np
 title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Alfred</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 
-# Data for Alfred, Lake
+# Initial values according to the baseline of 2022 for Lake Apopka
 initial_values = {
-    'Norm_CyAN': 116.5478593,
-    'AVFST_Max': 87.602,
-    'ARAIN_Average': 180.89,
-    'HUC12_forest_and_shrubland_4': 1.179865631,
-    'HUC10_grassland_and_pasture_3': 19.8966616,
-    'HUC10_cropland_area_1': 19.16765117,
-    'HUC12_developed_area_5': 36.24366856
+    'Norm_CyAN': 141.348473,
+    'AVFST_Max': 88.106,
+    'ARAIN_Average': 184.16,
+    'HUC12_forest_and_shrubland_4': 4.511227711,
+    'HUC10_grassland_and_pasture_3': 12.92275406,
+    'HUC10_cropland_area_1': 3.332721843,
+    'HUC12_developed_area_5': 27.27513883
 }
 
+# Coefficients for Lake Apopka
 coefficients = {
-    'intercept': 0.450934075,
-    'AVFST_Max': -0.064265153,
-    'ARAIN_Average': -0.616953104,
-    'HUC12_forest_and_shrubland_4': 1.355163625,
-    'HUC10_grassland_and_pasture_3': -0.685208505,
-    'HUC10_cropland_area_1': -0.609644451,
-    'HUC12_developed_area_5': 1.421769333
+    'intercept': 2.707261329,
+    'AVFST_Max': 0.057913537,
+    'ARAIN_Average': -0.112755289,
+    'HUC12_forest_and_shrubland_4': -0.363781812,
+    'HUC10_grassland_and_pasture_3': -5.514615137,
+    'HUC10_cropland_area_1': -2.882319595,
+    'HUC12_developed_area_5': -2.836429498
+}
 
 # Equations variables
 b1, c1, d1, e1, f1, g1 = 82.04, 163.72, 0, 0, 0, 0.052616068
