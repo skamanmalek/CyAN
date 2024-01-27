@@ -6,24 +6,23 @@ import numpy as np
 title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Harney</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 # Data for Alligator Lake
-initial_values = {
-    'Norm_CyAN': 192.0189738,
-    'AVFST_Max': 87.476,
-    'ARAIN_Average': 179.34,
-    'HUC12_forest_and_shrubland_4': 1.573906167,
-    'HUC10_grassland_and_pasture_3': 11.92659881,
-    'HUC10_cropland_area_1': 4.35476106,
-    'HUC12_developed_area_5': 41.06631922
+    'Norm_CyAN': 4.229387693,
+    'AVFST_Max': 85.874,
+    'ARAIN_Average': 190.61,
+    'HUC12_forest_and_shrubland_4': 15.92784635,
+    'HUC10_grassland_and_pasture_3': 8.448416023,
+    'HUC10_cropland_area_1': 0.325420469,
+    'HUC12_developed_area_5': 6.284380143
 }
 
 coefficients = {
-    'intercept': -3.374743986,
-    'AVFST_Max': 0.030381224,
-    'ARAIN_Average': -0.067116734,
-    'HUC12_forest_and_shrubland_4': 3.858475884,
-    'HUC10_grassland_and_pasture_3': 1.231748728,
-    'HUC10_cropland_area_1': 1.892940043,
-    'HUC12_developed_area_5': 7.758385429
+    'intercept': -0.171145793,
+    'AVFST_Max': -0.180435364,
+    'ARAIN_Average': 0.177040084,
+    'HUC12_forest_and_shrubland_4': 0.640318589,
+    'HUC10_grassland_and_pasture_3': -0.676784379,
+    'HUC10_cropland_area_1': 0.217140225,
+    'HUC12_developed_area_5': 1.715189988
 }
 
 # Equations variables
@@ -92,34 +91,3 @@ chart_data = pd.DataFrame({
 
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
