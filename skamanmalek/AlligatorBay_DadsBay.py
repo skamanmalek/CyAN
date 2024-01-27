@@ -3,10 +3,10 @@ import pandas as pd
 import numpy as np
 
 # Display the title with blue color and centered text
-title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Alligator Bay/Dads Bay</h1>"
+title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Alligator Bay/Dads Bayr</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 
-# Data for Alligator Bay/Dads Bay
+# Data for Alligator Lake
 initial_values = {
     'Norm_CyAN': 0.609401573,
     'AVFST_Max': 86.738,
@@ -93,5 +93,4 @@ chart_data = pd.DataFrame({
 
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
-
 
