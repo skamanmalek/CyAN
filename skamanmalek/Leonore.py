@@ -3,27 +3,27 @@ import pandas as pd
 import numpy as np
 
 # Display the title with blue color and centered text
-title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Konomac Lake</h1>"
+title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Leonore</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 # Data for Alligator Lake
 initial_values = {
-    'Norm_CyAN': 7.51209846,
-    'AVFST_Max': 85.946,
-    'ARAIN_Average': 184.77,
-    'HUC12_forest_and_shrubland_4': 6.658439046,
-    'HUC10_grassland_and_pasture_3': 3.251355021,
-    'HUC10_cropland_area_1': 0.245122503,
-    'HUC12_developed_area_5': 53.56892808
+    'Norm_CyAN': 62.90541906,
+    'AVFST_Max': 85.424,
+    'ARAIN_Average': 177.2,
+    'HUC12_forest_and_shrubland_4': 9.80020253,
+    'HUC10_grassland_and_pasture_3': 13.29057294,
+    'HUC10_cropland_area_1': 19.55412805,
+    'HUC12_developed_area_5': 2.607172134
 }
 
 coefficients = {
-    'intercept': 0.157613856,
-    'AVFST_Max': 0.024838948,
-    'ARAIN_Average': 0.488046531,
-    'HUC12_forest_and_shrubland_4': -0.357501933,
-    'HUC10_grassland_and_pasture_3': -2.806054426,
-    'HUC10_cropland_area_1': 0.117112944,
-    'HUC12_developed_area_5': -0.236282732
+    'intercept': 1.911837916,
+    'AVFST_Max': -0.731050074,
+    'ARAIN_Average': -0.297383757,
+    'HUC12_forest_and_shrubland_4': 0.633472664,
+    'HUC10_grassland_and_pasture_3': -3.625051001,
+    'HUC10_cropland_area_1': -2.819285081,
+    'HUC12_developed_area_5': -2.802702183
 }
 
 # Equations variables
@@ -32,7 +32,7 @@ b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 80.3992991, 81.38497115, 86.75640259, 79
 
 # Sidebar for user inputs with icons
 st.sidebar.markdown("<h2 style='font-size: 24px;'>🛠️ User Inputs:</h2>", unsafe_allow_html=True)
-st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Konomac Lake.")
+st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Leonore.")
  
 # Slider variables:
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
