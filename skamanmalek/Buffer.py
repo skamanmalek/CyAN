@@ -3,27 +3,27 @@ import pandas as pd
 import numpy as np
 
 # Display the title with blue color and centered text
-title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Buck Lake (B)</h1>"
+title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Buffer</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 # Data for Alligator Lake
 initial_values = {
-    'Norm_CyAN': 2.565409767,
-    'AVFST_Max': 85.892,
-    'ARAIN_Average': 183.13,
-    'HUC12_forest_and_shrubland_4': 6.17509932,
-    'HUC10_grassland_and_pasture_3': 6.753999684,
-    'HUC10_cropland_area_1': 0.555522157,
-    'HUC12_developed_area_5': 25.61890534
+    'Norm_CyAN': 1.541322666,
+    'AVFST_Max': 86.09,
+    'ARAIN_Average': 185.23,
+    'HUC12_forest_and_shrubland_4': 1.762814624,
+    'HUC10_grassland_and_pasture_3': 9.106475687,
+    'HUC10_cropland_area_1': 3.505417701,
+    'HUC12_developed_area_5': 49.26511115
 }
 
 coefficients = {
-    'intercept': -0.029971436,
-    'AVFST_Max': -0.028404457,
-    'ARAIN_Average': 0.026319997,
-    'HUC12_forest_and_shrubland_4': 0.075835165,
-    'HUC10_grassland_and_pasture_3': 0.030444592,
-    'HUC10_cropland_area_1': 0.021278064,
-    'HUC12_developed_area_5': 0.119780876
+    'intercept': 0.063120561,
+    'AVFST_Max': 0.001742199,
+    'ARAIN_Average': -0.025644975,
+    'HUC12_forest_and_shrubland_4': -0.167890762,
+    'HUC10_grassland_and_pasture_3': -0.182603578,
+    'HUC10_cropland_area_1': -0.054746933,
+    'HUC12_developed_area_5': -0.032998636
 }
 
 # Equations variables
@@ -32,8 +32,8 @@ b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 80.3992991, 81.38497115, 86.75640259, 79
 
 # Sidebar for user inputs with icons
 st.sidebar.markdown("<h2 style='font-size: 24px;'>🛠️ User Inputs:</h2>", unsafe_allow_html=True)
-st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Buck Lake (B).")
-
+st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Buffer.")
+ 
 # Slider variables:
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
 b4, c4, d4, e4, f4, g4 = 106.00, 450.00, 100.00, 100.00, 100.00, 100.00
