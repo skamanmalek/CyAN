@@ -13,7 +13,7 @@ initial_values = {
     'ARAIN_Average': 202.18,
     'HUC12_forest_and_shrubland_4': 0.003663144,
     'HUC10_grassland_and_pasture_3': 0.001998079,
-    'HUC10_cropland_area_1': 0,
+    'HUC10_cropland_area_1': 00.00000000,
     'HUC12_developed_area_5': 0.056778731
 }
 
