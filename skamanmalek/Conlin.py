@@ -3,27 +3,27 @@ import pandas as pd
 import numpy as np
 
 # Display the title with blue color and centered text
-title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Compass Lake</h1>"
+title_markdown = "<h1 style='color: blue; text-align: center;'>Future Cyanobacteria Bloom Magnitude Estimation in Lake Conlin</h1>"
 st.markdown(title_markdown, unsafe_allow_html=True)
 # Data for Alligator Lake
 initial_values = {
-    'Norm_CyAN': 2.206262033,
-    'AVFST_Max': 85.28,
-    'ARAIN_Average': 168.25,
-    'HUC12_forest_and_shrubland_4': 59.707405,
-    'HUC10_grassland_and_pasture_3': 4.268907212,
-    'HUC10_cropland_area_1': 2.561866518,
-    'HUC12_developed_area_5': 10.83817149
+    'Norm_CyAN': 4.478948659,
+    'AVFST_Max': 86,
+    'ARAIN_Average': 183.88,
+    'HUC12_forest_and_shrubland_4': 5.453408913,
+    'HUC10_grassland_and_pasture_3': 25.01201565,
+    'HUC10_cropland_area_1': 1.945684242,
+    'HUC12_developed_area_5': 1.9219458
 }
 
 coefficients = {
-    'intercept': 0.092042575,
-    'AVFST_Max': -0.032761163,
-    'ARAIN_Average': -0.007014258,
-    'HUC12_forest_and_shrubland_4': -0.011991606,
-    'HUC10_grassland_and_pasture_3': -0.027319659,
-    'HUC10_cropland_area_1': 0.080511169,
-    'HUC12_developed_area_5': -0.442309657
+    'intercept': 0.061164794,
+    'AVFST_Max': -0.001422703,
+    'ARAIN_Average': 0.079640381,
+    'HUC12_forest_and_shrubland_4': -0.257461329,
+    'HUC10_grassland_and_pasture_3': -0.141694463,
+    'HUC10_cropland_area_1': -0.100707499,
+    'HUC12_developed_area_5': -0.037569868
 }
 
 # Equations variables
@@ -32,7 +32,7 @@ b2, c2, d2, e2, f2, g2 = 90.86, 223.83, 80.3992991, 81.38497115, 86.75640259, 79
 
 # Sidebar for user inputs with icons
 st.sidebar.markdown("<h2 style='font-size: 24px;'>🛠️ User Inputs:</h2>", unsafe_allow_html=True)
-st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Compass Lake.")
+st.sidebar.write("The default values represent mean annual measurements derived from the 2022 baseline for Lake Conlin.")
  
 # Slider variables:
 b3, c3, d3, e3, f3, g3 = 82.04, 0.00, 0.00000000, 0.000000000, 0, 0.000000000
@@ -92,8 +92,6 @@ chart_data = pd.DataFrame({
 
 # Display the bar chart
 st.bar_chart(chart_data, x='Magnitude Type', y='Magnitude Value')
-
-
 
 
 
